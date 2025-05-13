@@ -5,7 +5,6 @@ CubeGrid::CubeGrid(int size)
     grid(size, std::vector<std::vector<CubeGridElement>>(
         size, std::vector<CubeGridElement>(size, CubeGridElement(0, 0, 0))))
 {
-    // Optionally call init() here
 }
 
 void CubeGrid::init() {

@@ -81,20 +81,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="Colors.cpp" />
     <ClCompile Include="CubeGrid.cpp" />
     <ClCompile Include="CubeGridElement.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Portal.h" />
     <ClCompile Include="tinyxml\tinystr.cpp" />
     <ClCompile Include="tinyxml\tinyxml.cpp" />
     <ClCompile Include="tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Worm.cpp" />
+    <ClCompile Include="WormPart.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Apple.h" />
+    <ClInclude Include="Colors.h" />
     <ClInclude Include="Coordinates3D.h" />
     <ClInclude Include="CubeGrid.h" />
     <ClInclude Include="CubeGridElement.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="Worm.h" />
     <ClInclude Include="WormPart.h" />
     <ClInclude Include="Terrain.h" />

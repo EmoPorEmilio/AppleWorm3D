@@ -4,5 +4,29 @@
     <Body x="0.0" y="2.0" z="1.0"/>
     <Tail x="-1.0" y="2.0" z="1.0"/>
 </Worm>
-<Terrain x="1.0" y="1.0" z="1.0"/>
-<Portal x="5.0" y="1.0" z="1.0"/>
+<!-- first row -->
+<Terrain x="0" y="0" z="0"/>
+<Terrain x="1" y="0" z="0"/>
+<Terrain x="2" y="0" z="0"/>
+<Terrain x="3" y="0" z="0"/>
+<Terrain x="4" y="0" z="0"/>
+<Terrain x="5" y="0" z="0"/>
+
+<!-- second row -->
+<Terrain x="0" y="0" z="1"/>
+<Terrain x="1" y="0" z="1"/>
+<Terrain x="2" y="0" z="1"/>
+<Terrain x="3" y="0" z="1"/>
+<Terrain x="4" y="0" z="1"/>
+<Terrain x="5" y="0" z="1"/>
+
+<!-- third row -->
+<Terrain x="0" y="0" z="2"/>
+<Terrain x="1" y="0" z="2"/>
+<Terrain x="2" y="0" z="2"/>
+<Terrain x="3" y="0" z="2"/>
+<Terrain x="4" y="0" z="2"/>
+<Terrain x="5" y="0" z="2"/>
+
+<Apple x="0" y="1" z="2"/>
+<Portal x="5" y="1" z="0"/>

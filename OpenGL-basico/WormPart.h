@@ -7,11 +7,7 @@ class WormPart : public GameObject {
 public:
     WormPartType type;
 
-    WormPart(const Coordinates3D& pos, WormPartType type)
-        : GameObject(pos), type(type) {
-    }
+    WormPart(const Coordinates3D& pos, WormPartType type);
 
-    void draw() override {
-
-    }
+    void draw() override;
 };
