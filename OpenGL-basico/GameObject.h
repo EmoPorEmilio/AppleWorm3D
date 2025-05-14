@@ -1,11 +1,11 @@
 #pragma once
-#include "Coordinates3D.h"
+#include "Vector3.h"
 
 class GameObject {
 public:
-    Coordinates3D position;
+    Vector3 position;
 
-    GameObject(const Coordinates3D& pos) : position(pos) {}
+    GameObject(Vector3 position);
     virtual ~GameObject() = default;
 
     virtual void draw() = 0;

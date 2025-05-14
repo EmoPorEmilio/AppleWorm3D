@@ -13,13 +13,11 @@ void drawCube(int x, int y, int z, float size, Colors color) {
     glScalef(size, size, size);
 
     glBegin(GL_QUADS);
-    // ... (cube faces as in your code) ...
     glNormal3f(0, 0, 1);
     glVertex3f(-0.5f, -0.5f, 0.5f);
     glVertex3f(0.5f, -0.5f, 0.5f);
     glVertex3f(0.5f, 0.5f, 0.5f);
     glVertex3f(-0.5f, 0.5f, 0.5f);
-    // ... (rest of faces, unchanged) ...
     glNormal3f(0, 0, -1);
     glVertex3f(-0.5f, -0.5f, -0.5f);
     glVertex3f(-0.5f, 0.5f, -0.5f);

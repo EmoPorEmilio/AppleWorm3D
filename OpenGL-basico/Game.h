@@ -1,6 +1,7 @@
 #pragma once
 #include "CubeGrid.h"
 #include "Colors.h"
+#include "Camera.h"
 
 class Game {
 private:
@@ -14,12 +15,14 @@ private:
     int lastMouseX;
     int lastMouseY;
     bool isDragging;
+	Camera* camera;
     SDL_Window* window;
 	SDL_GLContext glctx;
-    CubeGrid grid;
+    CubeGrid* grid;
+    Vector3 characterPosition;
 
 public:
-    Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius);
+    Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius, Camera* camera, Vector3 characterPosition);
     void loop();
     void destroy();
     void render(int width, int height);

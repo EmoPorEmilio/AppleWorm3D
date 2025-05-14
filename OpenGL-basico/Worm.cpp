@@ -1,19 +1,18 @@
 #pragma once
 #include <vector>
 #include "WormPart.h"
-#include "Coordinates3D.h"
 
 class Worm {
 public:
     WormPart head;
     WormPart tail;
     std::vector<WormPart> body;
-    std::vector<Coordinates3D> orientation;
+    std::vector<Vector3> orientation;
 
-    Worm(const Coordinates3D& headPos,
-        const Coordinates3D& bodyPos,
-        const Coordinates3D& tailPos,
-        const std::vector<Coordinates3D>& orientationVec)
+    Worm(const Vector3 headPos,
+        const Vector3 bodyPos,
+        const Vector3 tailPos,
+        const std::vector<Vector3>& orientationVec)
         : head(headPos, WormPartType::Head),
         tail(tailPos, WormPartType::Tail),
         body{ WormPart(bodyPos, WormPartType::Body) },

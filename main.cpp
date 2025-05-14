@@ -5,7 +5,8 @@
 #include <stdio.h>
 #include <conio.h>
 #include "OpenGL-basico/Game.h"
-
+#include "OpenGL-basico/Camera.h"
+#include "OpenGL-basico/Colors.h"
 
 using namespace std;
 
@@ -16,7 +17,12 @@ int lastMouseX, lastMouseY;
 bool isDragging = false;
 
 int main(int argc, char* argv[]) {
-	Game game(10, width, height, camAngleX, camAngleY, radius);
+    Vector3 characterPosition(0.0f, 0.0f, 0.0f);
+
+    Camera* camera = new Camera();
+    camera->Initialize(0.0f, 0.0f, 5.0f);
+    camera->SetCharacterReference(&characterPosition);
+	Game game(10, width, height, camAngleX, camAngleY, radius, camera, characterPosition);
     game.loadGameObjectsFromXML("level1.xml");
     game.loop();
     game.destroy();

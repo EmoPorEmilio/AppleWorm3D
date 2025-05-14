@@ -3,16 +3,72 @@
   "WorkspaceRootPath": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGrid.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\CubeGrid.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGridElement.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\CubeGridElement.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGrid.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\CubeGrid.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Terrain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Terrain.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGridElement.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\CubeGridElement.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\WormPart.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Worm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Worm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Worm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Worm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\WormPart.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Apple.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -23,36 +79,56 @@
       "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\FollowCameraStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\FollowCameraStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\SideCameraStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\SideCameraStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Colors.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Colors.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\ICameraStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\ICameraStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Animateable.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Animateable.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Animator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Animator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Animator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Animator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\FreeCameraStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\FreeCameraStrategy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Vector3.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Vector3.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Colors.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Colors.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\WormPart.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Worm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Worm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\WormPart.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Colors.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Colors.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Portal.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -66,7 +142,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,33 +150,228 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Utils.cpp",
-              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.cpp",
-              "RelativeDocumentMoniker": "OpenGL-basico\\Utils.cpp",
-              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.cpp",
-              "RelativeToolTip": "OpenGL-basico\\Utils.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "GameObject.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\GameObject.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\GameObject.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\GameObject.cpp",
+              "RelativeToolTip": "OpenGL-basico\\GameObject.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-12T23:49:10.889Z",
+              "WhenOpened": "2025-05-14T19:10:00.124Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
+              "Title": "Scene.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Scene.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Scene.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Scene.cpp",
+              "RelativeToolTip": "OpenGL-basico\\Scene.cpp",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAF4AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-14T16:48:10.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CubeGridElement.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGridElement.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\CubeGridElement.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGridElement.cpp",
+              "RelativeToolTip": "OpenGL-basico\\CubeGridElement.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-14T14:36:29.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Game.cpp",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.cpp",
               "RelativeDocumentMoniker": "OpenGL-basico\\Game.cpp",
               "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.cpp",
               "RelativeToolTip": "OpenGL-basico\\Game.cpp",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAAAI4AAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAIBAAAAAAAAAAAAABEBAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-12T23:06:57.35Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Terrain.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Terrain.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.cpp",
+              "RelativeToolTip": "OpenGL-basico\\Terrain.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-14T19:07:34.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "WormPart.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\WormPart.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.h",
+              "RelativeToolTip": "OpenGL-basico\\WormPart.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-12T23:46:33.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Camera.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Camera.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Camera.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Camera.cpp",
+              "RelativeToolTip": "OpenGL-basico\\Camera.cpp",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-14T16:36:25.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "Camera.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Camera.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Camera.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Camera.h",
+              "RelativeToolTip": "OpenGL-basico\\Camera.h",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAADoAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T16:36:03.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\main.cpp",
+              "RelativeDocumentMoniker": "main.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\main.cpp",
+              "RelativeToolTip": "main.cpp",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAWwBkAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-12T22:24:51.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Game.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Game.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.h",
+              "RelativeToolTip": "OpenGL-basico\\Game.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-12T23:08:03.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Terrain.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Terrain.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.h",
+              "RelativeToolTip": "OpenGL-basico\\Terrain.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T19:01:09.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CubeGrid.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGrid.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\CubeGrid.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGrid.h",
+              "RelativeToolTip": "OpenGL-basico\\CubeGrid.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T16:10:32.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CubeGrid.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGrid.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\CubeGrid.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGrid.cpp",
+              "RelativeToolTip": "OpenGL-basico\\CubeGrid.cpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-12T23:45:27.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CubeGridElement.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGridElement.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\CubeGridElement.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGridElement.h",
+              "RelativeToolTip": "OpenGL-basico\\CubeGridElement.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T14:24:11.925Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Worm.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Worm.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Worm.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Worm.cpp",
+              "RelativeToolTip": "OpenGL-basico\\Worm.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-12T23:42:37.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Worm.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Worm.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Worm.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Worm.h",
+              "RelativeToolTip": "OpenGL-basico\\Worm.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T19:23:26.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "WormPart.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\WormPart.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.cpp",
+              "RelativeToolTip": "OpenGL-basico\\WormPart.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-12T23:46:16.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "Apple.h",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Apple.h",
               "RelativeDocumentMoniker": "OpenGL-basico\\Apple.h",
@@ -113,7 +384,150 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 18,
+              "Title": "GameObject.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\GameObject.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\GameObject.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\GameObject.h",
+              "RelativeToolTip": "OpenGL-basico\\GameObject.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-12T23:43:56.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "FollowCameraStrategy.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\FollowCameraStrategy.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\FollowCameraStrategy.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\FollowCameraStrategy.h",
+              "RelativeToolTip": "OpenGL-basico\\FollowCameraStrategy.h",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAqwF0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T16:36:46.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "SideCameraStrategy.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\SideCameraStrategy.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\SideCameraStrategy.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\SideCameraStrategy.h",
+              "RelativeToolTip": "OpenGL-basico\\SideCameraStrategy.h",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAE4AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T16:37:47.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ICameraStrategy.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\ICameraStrategy.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\ICameraStrategy.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\ICameraStrategy.h",
+              "RelativeToolTip": "OpenGL-basico\\ICameraStrategy.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T16:37:27.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Animateable.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Animateable.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Animateable.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Animateable.h",
+              "RelativeToolTip": "OpenGL-basico\\Animateable.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T18:29:38.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Scene.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Scene.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Scene.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Scene.h",
+              "RelativeToolTip": "OpenGL-basico\\Scene.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T16:47:52.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Animator.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Animator.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Animator.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Animator.cpp",
+              "RelativeToolTip": "OpenGL-basico\\Animator.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-14T18:28:20.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Animator.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Animator.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Animator.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Animator.h",
+              "RelativeToolTip": "OpenGL-basico\\Animator.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T18:27:50.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "FreeCameraStrategy.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\FreeCameraStrategy.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\FreeCameraStrategy.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\FreeCameraStrategy.h",
+              "RelativeToolTip": "OpenGL-basico\\FreeCameraStrategy.h",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAAAH4AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T16:37:09.479Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Vector3.h",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Vector3.h",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Vector3.h",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Vector3.h",
+              "RelativeToolTip": "OpenGL-basico\\Vector3.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-14T14:38:27.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Utils.cpp",
+              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.cpp",
+              "RelativeDocumentMoniker": "OpenGL-basico\\Utils.cpp",
+              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.cpp",
+              "RelativeToolTip": "OpenGL-basico\\Utils.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-12T23:49:10.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
               "Title": "Utils.h",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.h",
               "RelativeDocumentMoniker": "OpenGL-basico\\Utils.h",
@@ -126,7 +540,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 31,
               "Title": "Colors.cpp",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Colors.cpp",
               "RelativeDocumentMoniker": "OpenGL-basico\\Colors.cpp",
@@ -134,51 +548,11 @@
               "RelativeToolTip": "OpenGL-basico\\Colors.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-12T22:27:44.832Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T22:27:44.832Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\main.cpp",
-              "RelativeDocumentMoniker": "main.cpp",
-              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\main.cpp",
-              "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-12T22:24:51.776Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GameObject.h",
-              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\GameObject.h",
-              "RelativeDocumentMoniker": "OpenGL-basico\\GameObject.h",
-              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\GameObject.h",
-              "RelativeToolTip": "OpenGL-basico\\GameObject.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-12T23:43:56.937Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CubeGrid.cpp",
-              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGrid.cpp",
-              "RelativeDocumentMoniker": "OpenGL-basico\\CubeGrid.cpp",
-              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\CubeGrid.cpp",
-              "RelativeToolTip": "OpenGL-basico\\CubeGrid.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-12T23:45:27.588Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 28,
               "Title": "Colors.h",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Colors.h",
               "RelativeDocumentMoniker": "OpenGL-basico\\Colors.h",
@@ -191,59 +565,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "WormPart.cpp",
-              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.cpp",
-              "RelativeDocumentMoniker": "OpenGL-basico\\WormPart.cpp",
-              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.cpp",
-              "RelativeToolTip": "OpenGL-basico\\WormPart.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-12T23:46:16.699Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Worm.cpp",
-              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Worm.cpp",
-              "RelativeDocumentMoniker": "OpenGL-basico\\Worm.cpp",
-              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Worm.cpp",
-              "RelativeToolTip": "OpenGL-basico\\Worm.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-12T23:42:37.801Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Game.h",
-              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.h",
-              "RelativeDocumentMoniker": "OpenGL-basico\\Game.h",
-              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.h",
-              "RelativeToolTip": "OpenGL-basico\\Game.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-12T23:08:03.815Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "WormPart.h",
-              "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.h",
-              "RelativeDocumentMoniker": "OpenGL-basico\\WormPart.h",
-              "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\WormPart.h",
-              "RelativeToolTip": "OpenGL-basico\\WormPart.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-12T23:46:33.41Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 32,
               "Title": "Portal.h",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Portal.h",
               "RelativeDocumentMoniker": "OpenGL-basico\\Portal.h",
@@ -251,8 +573,7 @@
               "RelativeToolTip": "OpenGL-basico\\Portal.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-12T23:42:05.486Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T23:42:05.486Z"
             }
           ]
         }

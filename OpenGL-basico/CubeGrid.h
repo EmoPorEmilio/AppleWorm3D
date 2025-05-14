@@ -1,14 +1,19 @@
 #pragma once
 #include <vector>
 #include "CubeGridElement.h"
+#include "Vector3.h"
 
 class CubeGrid {
 private:
-    int size;
-    std::vector<std::vector<std::vector<CubeGridElement>>> grid;
+    int gridSize;
+    std::vector<std::vector<std::vector<CubeGridElement*>>> grid;
 
 public:
-    CubeGrid(int size);
-    void init();
-    CubeGridElement& at(int x, int y, int z); // Accessor
+    CubeGrid(int initialSize);
+    ~CubeGrid();
+
+    CubeGridElement* at(Vector3 position);
+
+    CubeGrid(const CubeGrid&) = delete;
+    CubeGrid& operator=(const CubeGrid&) = delete;
 };

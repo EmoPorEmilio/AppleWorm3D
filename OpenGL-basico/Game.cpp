@@ -9,6 +9,11 @@
 #include "Colors.h"
 #include "WormPart.h"
 #include "Worm.h"
+#include "Terrain.h"
+#include "GameObject.h"
+#include "Scene.h"
+#include "Camera.h"
+#include "CubeGrid.h"
 #include "tinyxml/tinyxml.h"
 #include "Utils.h"
 
@@ -33,26 +38,26 @@ void Game::loadGameObjectsFromXML(const char* filename) {
 
             if (strcmp(value, "Worm") == 0) {
                 TiXmlElement* current_element = element->FirstChildElement();
-                Coordinates3D head(0, 0, 0), body(0, 0, 0), tail(0, 0, 0), orientation(0, 0, 0);
+                Vector3 head(0, 0, 0), body(0, 0, 0), tail(0, 0, 0), orientation(0, 0, 0);
                 while (current_element != nullptr) {
                     auto value = current_element->Value();
                     if (strcmp(value, "Head") == 0) {
                         element->QueryFloatAttribute("x", &x);
                         element->QueryFloatAttribute("y", &y);
                         element->QueryFloatAttribute("z", &z);
-                        head = Coordinates3D(x, y, z);
+                        head = Vector3(x, y, z);
                     }
                     else if (strcmp(value, "Body") == 0) {
                         element->QueryFloatAttribute("x", &x);
                         element->QueryFloatAttribute("y", &y);
                         element->QueryFloatAttribute("z", &z);
-                        body = Coordinates3D(x, y, z);
+                        body = Vector3(x, y, z);
                     }
                     else if (strcmp(value, "Tail") == 0) {
                         element->QueryFloatAttribute("x", &x);
                         element->QueryFloatAttribute("y", &y);
                         element->QueryFloatAttribute("z", &z);
-                        tail = Coordinates3D(x, y, z);
+                        tail = Vector3(x, y, z);
                     }
                     std::cout << "Child Element Name: " << value << ", Content: " << text << std::endl;
                     current_element = current_element->NextSiblingElement();
@@ -126,6 +131,8 @@ void Game::render(int width, int height) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    /*
+
     // Camera orbit
     float camX = radius * sinf(camAngleY * 3.14159f / 180.0f) *
         cosf(camAngleX * 3.14159f / 180.0f);
@@ -133,7 +140,7 @@ void Game::render(int width, int height) {
     float camZ = radius * cosf(camAngleY * 3.14159f / 180.0f) *
         cosf(camAngleX * 3.14159f / 180.0f);
 
-    gluLookAt(camX, camY, camZ, 0, 0, 0, 0, 1, 0);
+    gluLookAt(camX, camY, camZ, 0, 0, 0, 0, 1, 0);*/
 
     setupLighting();
 
@@ -168,10 +175,24 @@ void Game::render(int width, int height) {
     drawCube(5, 1, 0, 1.0, Colors::BLUE);
 }
 
-Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius)
-    : score(0), step(0), width(width), height(height), camAngleX(camAngleX), camAngleY(camAngleY), radius(radius), lastMouseX(0), lastMouseY(0), isDragging(false), grid(gridSize), window(nullptr)
+Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius, Camera* camera, Vector3 characterPosition)
+    : score(0),
+    step(0),
+    width(width),
+    height(height),
+    camAngleX(camAngleX),
+    camAngleY(camAngleY),
+    radius(radius),
+    lastMouseX(0),
+    lastMouseY(0),
+    isDragging(false),
+    camera(camera),
+    window(nullptr),
+    glctx(nullptr),
+    grid(nullptr),
+	characterPosition(characterPosition)
 {
-    grid.init();
+    grid = new CubeGrid(gridSize);
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
@@ -192,47 +213,60 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
 void Game::loop() {
     bool running = true;
     SDL_Event event;
+    bool rotate = false;
+    bool ctrlPressed = false;
+    float degrees = 0;
+
+    //SDL_SetRelativeMouseMode(SDL_TRUE);
     while (running) {
         while (SDL_PollEvent(&event)) {
+            // Procesar eventos para la cámara
+            camera->HandleEvent(event);
+
             switch (event.type) {
-            case SDL_QUIT:
-                running = false;
-                break;
-            case SDL_WINDOWEVENT:
-                if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-                    width = event.window.data1;
-                    height = event.window.data2;
-                }
-                break;
             case SDL_MOUSEBUTTONDOWN:
-                if (event.button.button == SDL_BUTTON_LEFT) {
-                    isDragging = true;
-                    lastMouseX = event.button.x;
-                    lastMouseY = event.button.y;
+                // Solo activar rotación si CTRL está presionado
+                if (ctrlPressed) {
+                    rotate = true;
+                    std::cout << "ROT\n";
                 }
                 break;
             case SDL_MOUSEBUTTONUP:
-                if (event.button.button == SDL_BUTTON_LEFT) {
-                    isDragging = false;
+                if (ctrlPressed) {
+                    rotate = false;
                 }
                 break;
-            case SDL_MOUSEMOTION:
-                if (isDragging) {
-                    int dx = event.motion.x - lastMouseX;
-                    int dy = event.motion.y - lastMouseY;
-                    camAngleY += dx;
-                    camAngleX += dy;
-                    if (camAngleX > 89) camAngleX = 89;
-                    if (camAngleX < -89) camAngleX = -89;
-                    lastMouseX = event.motion.x;
-                    lastMouseY = event.motion.y;
+            case SDL_QUIT:
+                running = false;
+                break;
+            case SDL_KEYDOWN:
+                // Comprobar CTRL
+                if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL) {
+                    ctrlPressed = true;
+                }
+                // Mover al personaje con teclas de flecha
+                else if (event.key.keysym.sym == SDLK_UP) {
+                    characterPosition.z -= 0.1f;
+                }
+                else if (event.key.keysym.sym == SDLK_DOWN) {
+                    characterPosition.z += 0.1f;
+                }
+                else if (event.key.keysym.sym == SDLK_LEFT) {
+                    characterPosition.x -= 0.1f;
+                }
+                else if (event.key.keysym.sym == SDLK_RIGHT) {
+                    characterPosition.x += 0.1f;
                 }
                 break;
-            case SDL_MOUSEWHEEL:
-                // Zoom in/out
-                radius -= event.wheel.y * 0.5f; // y > 0 is scroll up
-                if (radius < 2.0f) radius = 2.0f;
-                if (radius > 20.0f) radius = 20.0f;
+            case SDL_KEYUP:
+                if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL) {
+                    ctrlPressed = false;
+                    // Si soltamos CTRL, también dejamos de rotar
+                    rotate = false;
+                }
+                else if (event.key.keysym.sym == SDLK_ESCAPE) {
+                    running = false;
+                }
                 break;
             }
         }

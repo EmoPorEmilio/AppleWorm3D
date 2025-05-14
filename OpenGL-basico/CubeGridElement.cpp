@@ -1,8 +1,22 @@
-class CubeGridElement {
-public:
-    int x, y, z;
+#include "CubeGridElement.h"
 
-    CubeGridElement(int x, int y, int z)
-        : x(x), y(y), z(z) {
-    }
+    CubeGridElement::CubeGridElement(Vector3 position)
+        : position(position), object(nullptr){
+
+
+	/*void CubeGridElement::setObject(GameObject * obj) {
+		object = obj;
+	}
+
+	GameObject* CubeGridElement::getObject() {
+		return object;
+	}
+
+	bool CubeGridElement::isBlockedByTerrain() {
+		return dynamic_cast<Terrain*>(object) == nullptr;
+	}
+
+	bool CubeGridElement::canSupportWormWeight() {
+		return dynamic_cast<Terrain*>(object) != nullptr || dynamic_cast<Apple*>(object) != nullptr;
+	} */
 };

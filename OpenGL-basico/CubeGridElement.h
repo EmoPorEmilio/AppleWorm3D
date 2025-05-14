@@ -1,13 +1,22 @@
 #pragma once
-#include <memory>
+#include "Vector3.h"
 #include "GameObject.h"
+#include "Terrain.h"
+#include "Apple.h"
 
 class CubeGridElement {
 public:
-    int x, y, z;
-    std::shared_ptr<GameObject> object;
+	const Vector3 position;
+	CubeGridElement(Vector3 position);
+private:
+    GameObject* object;
 
-    CubeGridElement(int x, int y, int z)
-        : x(x), y(y), z(z), object(nullptr) {
-    }
+	/*
+	void setObject(GameObject* obj);
+
+	GameObject* getObject();
+
+	bool isBlockedByTerrain();
+
+	bool canSupportWormWeight();*/
 };

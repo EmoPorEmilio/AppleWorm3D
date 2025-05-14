@@ -3,7 +3,7 @@
 
 class Terrain : public GameObject {
 public:
+    Terrain(Vector3 coordinates);
 
-    void draw() override {
-    }
+    void draw() override;
 };

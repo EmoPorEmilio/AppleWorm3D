@@ -81,11 +81,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Colors.cpp" />
     <ClCompile Include="CubeGrid.cpp" />
     <ClCompile Include="CubeGridElement.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Portal.h" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="tinyxml\tinystr.cpp" />
     <ClCompile Include="tinyxml\tinyxml.cpp" />
     <ClCompile Include="tinyxml\tinyxmlerror.cpp" />
@@ -95,14 +100,22 @@
     <ClCompile Include="WormPart.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animateable.h" />
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="Apple.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Colors.h" />
-    <ClInclude Include="Coordinates3D.h" />
     <ClInclude Include="CubeGrid.h" />
     <ClInclude Include="CubeGridElement.h" />
+    <ClInclude Include="FollowCameraStrategy.h" />
+    <ClInclude Include="FreeCameraStrategy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ICameraStrategy.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SideCameraStrategy.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="Vector3.h" />
     <ClInclude Include="Worm.h" />
     <ClInclude Include="WormPart.h" />
     <ClInclude Include="Terrain.h" />
