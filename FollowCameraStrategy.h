@@ -61,25 +61,21 @@ public:
         
         if (event.type == SDL_MOUSEMOTION) {
             Uint32 mouseState = SDL_GetMouseState(NULL, NULL);
-            if (IsMouseButtonPressed(mouseState)) {
-                float xSensitivity = mouseSensitivity * 0.5f;
-                float ySensitivity = mouseSensitivity * 0.5f;
+            if ((mouseState & SDL_BUTTON(SDL_BUTTON_RIGHT)) || 
+                (mouseState & SDL_BUTTON(SDL_BUTTON_LEFT))) {
+                localYaw -= event.motion.xrel * mouseSensitivity;
+                localPitch += event.motion.yrel * mouseSensitivity;
                 
-                if (IsValidMouseMovement(event.motion.xrel, event.motion.yrel)) {
-                    localYaw -= event.motion.xrel * xSensitivity;
-                    localPitch += event.motion.yrel * ySensitivity;
-                    
-                    while (localYaw >= 360.0f) localYaw -= 360.0f;
-                    while (localYaw < 0.0f) localYaw += 360.0f;
-                    
-                    if (localPitch > 85.0f) localPitch = 85.0f;
-                    if (localPitch < -45.0f) localPitch = -45.0f;
-                    
-                    cameraYaw = localYaw;
-                    cameraPitch = localPitch;
-                    
-                    Update(position, target, up);
-                }
+                while (localYaw >= 360.0f) localYaw -= 360.0f;
+                while (localYaw < 0.0f) localYaw += 360.0f;
+                
+                if (localPitch > 85.0f) localPitch = 85.0f;
+                if (localPitch < -45.0f) localPitch = -45.0f;
+                
+                cameraYaw = localYaw;
+                cameraPitch = localPitch;
+                
+                Update(position, target, up);
             }
         }
     }

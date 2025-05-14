@@ -75,6 +75,7 @@ int main(int argc, char *argv[]) {
 
 	bool fin = false;
 	bool rotate = false;
+	bool ctrlPressed = false;
 
 	SDL_Event evento;
 
@@ -128,18 +129,27 @@ int main(int argc, char *argv[]) {
 			
 			switch (evento.type) {
 			case SDL_MOUSEBUTTONDOWN:
-				rotate = true;
-				cout << "ROT\n";
+				// Solo activar rotación si CTRL está presionado
+				if (ctrlPressed) {
+					rotate = true;
+					cout << "ROT\n";
+				}
 				break;
 			case SDL_MOUSEBUTTONUP:
-				rotate = false;
+				if (ctrlPressed) {
+					rotate = false;
+				}
 				break;
 			case SDL_QUIT:
 				fin = true;
 				break;
 			case SDL_KEYDOWN:
+				// Comprobar CTRL
+				if (evento.key.keysym.sym == SDLK_LCTRL || evento.key.keysym.sym == SDLK_RCTRL) {
+					ctrlPressed = true;
+				}
 				// Mover al personaje con teclas de flecha
-				if (evento.key.keysym.sym == SDLK_UP) {
+				else if (evento.key.keysym.sym == SDLK_UP) {
 					characterPosition.z -= 0.1f;
 				}
 				else if (evento.key.keysym.sym == SDLK_DOWN) {
@@ -153,11 +163,15 @@ int main(int argc, char *argv[]) {
 				}
 				break;
 			case SDL_KEYUP:
-				switch (evento.key.keysym.sym) {
-				case SDLK_ESCAPE:
-					fin = true;
-					break;
+				if (evento.key.keysym.sym == SDLK_LCTRL || evento.key.keysym.sym == SDLK_RCTRL) {
+					ctrlPressed = false;
+					// Si soltamos CTRL, también dejamos de rotar
+					rotate = false;
 				}
+				else if (evento.key.keysym.sym == SDLK_ESCAPE) {
+					fin = true;
+				}
+				break;
 			}
 		}
 		//FIN MANEJO DE EVENTOS

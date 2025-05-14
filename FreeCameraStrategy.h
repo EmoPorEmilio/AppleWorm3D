@@ -21,6 +21,8 @@ private:
 
 public:
     virtual void Update(Vector3& position, Vector3& target, Vector3& up) override {
+        // Al entrar a este modo, se mantiene la posición y dirección actuales
+        // La actualización de la posición/dirección se hace en HandleInput
     }
     
     virtual void HandleInput(const SDL_Event& event, 
@@ -29,6 +31,12 @@ public:
                            Vector3& up, 
                            float& cameraYaw, 
                            float& cameraPitch) override {
+        // Sincronizar valores locales con los de la cámara principal
+        if (localYaw != cameraYaw || localPitch != cameraPitch) {
+            localYaw = cameraYaw;
+            localPitch = cameraPitch;
+        }
+        
         if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
                 case SDLK_w: MoveForward(position, target, moveSpeed); break;
@@ -56,25 +64,21 @@ public:
         
         if (event.type == SDL_MOUSEMOTION) {
             Uint32 mouseState = SDL_GetMouseState(NULL, NULL);
-            if (IsMouseButtonPressed(mouseState)) {
-                float xSensitivity = mouseSensitivity * 0.5f;
-                float ySensitivity = mouseSensitivity * 0.5f;
+            if ((mouseState & SDL_BUTTON(SDL_BUTTON_RIGHT)) || 
+                (mouseState & SDL_BUTTON(SDL_BUTTON_LEFT))) {
+                cameraYaw += -event.motion.xrel * mouseSensitivity;
+                cameraPitch += -event.motion.yrel * mouseSensitivity;
                 
-                if (IsValidMouseMovement(event.motion.xrel, event.motion.yrel)) {
-                    cameraYaw += -event.motion.xrel * xSensitivity;
-                    cameraPitch += -event.motion.yrel * ySensitivity;
-                    
-                    while (cameraYaw >= 360.0f) cameraYaw -= 360.0f;
-                    while (cameraYaw < 0.0f) cameraYaw += 360.0f;
-                    
-                    if (cameraPitch > 89.0f) cameraPitch = 89.0f;
-                    if (cameraPitch < -89.0f) cameraPitch = -89.0f;
-                    
-                    localYaw = cameraYaw;
-                    localPitch = cameraPitch;
-                    
-                    UpdateDirection(position, target, cameraYaw, cameraPitch);
-                }
+                while (cameraYaw >= 360.0f) cameraYaw -= 360.0f;
+                while (cameraYaw < 0.0f) cameraYaw += 360.0f;
+                
+                if (cameraPitch > 89.0f) cameraPitch = 89.0f;
+                if (cameraPitch < -89.0f) cameraPitch = -89.0f;
+                
+                localYaw = cameraYaw;
+                localPitch = cameraPitch;
+                
+                UpdateDirection(position, target, cameraYaw, cameraPitch);
             }
         }
     }

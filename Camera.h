@@ -6,11 +6,13 @@
 #include "ICameraStrategy.h"
 #include "FreeCameraStrategy.h"
 #include "FollowCameraStrategy.h"
+#include "SideCameraStrategy.h"
 #include <memory>
 
 enum class CameraMode {
     FREECAM,
-    FOLLOW_CHARACTER
+    FOLLOW_CHARACTER,
+    SIDE_VIEW
 };
 
 class Camera {
@@ -26,10 +28,9 @@ private:
     
     std::unique_ptr<FreeCameraStrategy> freeStrategy;
     std::unique_ptr<FollowCameraStrategy> followStrategy;
+    std::unique_ptr<SideCameraStrategy> sideStrategy;
     
     CameraMode currentMode;
-    
-    bool rotationEnabled;
     
 public:
     Camera();
@@ -54,9 +55,5 @@ public:
     
     void SetFollowHeight(float height);
     
-    // Habilita o deshabilita la rotación de la cámara con el ratón
-    void EnableRotation(bool enabled);
-    
-    // Comprueba si la rotación está habilitada
-    bool IsRotationEnabled() const;
+    void SetSideDistance(float distance);
 }; 
