@@ -5,8 +5,51 @@
 #include <stdio.h>
 #include <conio.h>
 #include <GL/glu.h>
+#include "Camera.h"
+#include "Vector3.h"
 
 using namespace std;
+
+// Función para dibujar un cubo sin usar GLUT
+void drawCube() {
+	glBegin(GL_QUADS);
+	// Cara frontal (z = 0.5)
+	glVertex3f(-0.5f, -0.5f, 0.5f);
+	glVertex3f(0.5f, -0.5f, 0.5f);
+	glVertex3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(-0.5f, 0.5f, 0.5f);
+	
+	// Cara trasera (z = -0.5)
+	glVertex3f(-0.5f, -0.5f, -0.5f);
+	glVertex3f(-0.5f, 0.5f, -0.5f);
+	glVertex3f(0.5f, 0.5f, -0.5f);
+	glVertex3f(0.5f, -0.5f, -0.5f);
+	
+	// Cara superior (y = 0.5)
+	glVertex3f(-0.5f, 0.5f, -0.5f);
+	glVertex3f(-0.5f, 0.5f, 0.5f);
+	glVertex3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(0.5f, 0.5f, -0.5f);
+	
+	// Cara inferior (y = -0.5)
+	glVertex3f(-0.5f, -0.5f, -0.5f);
+	glVertex3f(0.5f, -0.5f, -0.5f);
+	glVertex3f(0.5f, -0.5f, 0.5f);
+	glVertex3f(-0.5f, -0.5f, 0.5f);
+	
+	// Cara derecha (x = 0.5)
+	glVertex3f(0.5f, -0.5f, -0.5f);
+	glVertex3f(0.5f, 0.5f, -0.5f);
+	glVertex3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(0.5f, -0.5f, 0.5f);
+	
+	// Cara izquierda (x = -0.5)
+	glVertex3f(-0.5f, -0.5f, -0.5f);
+	glVertex3f(-0.5f, -0.5f, 0.5f);
+	glVertex3f(-0.5f, 0.5f, 0.5f);
+	glVertex3f(-0.5f, 0.5f, -0.5f);
+	glEnd();
+}
 
 int main(int argc, char *argv[]) {
 	//INICIALIZACION
@@ -35,23 +78,32 @@ int main(int argc, char *argv[]) {
 
 	SDL_Event evento;
 
-	float x, y, z;
+	Vector3 characterPosition(0.0f, 0.0f, 0.0f);
+	
+	Camera camera;
+	camera.Initialize(0.0f, 0.0f, 5.0f);
+	camera.SetCharacterReference(&characterPosition);
 
-	x = 0;
-	y = 0;
-	z = 5;
 	float degrees = 0;
+
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	do {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
-		gluLookAt(x, y, z, 0, 0, 0, 0, 1, 0);
+		
+		// Actualizar la cámara (especialmente importante para modo de seguimiento)
+		camera.Update();
+		
+		// Aplicar la cámara
+		camera.Apply();
 
 		if (rotate) {
 			degrees = degrees + 0.1f;
 		}
 		glRotatef(degrees, 0.0, 1.0, 0.0);
 
+		// Dibujar un triángulo (como ejemplo)
 		glBegin(GL_TRIANGLES);
 		glColor3f(1.0, 1.0, 1.0);
 		glVertex3f(1., -1., 0.);
@@ -60,10 +112,20 @@ int main(int argc, char *argv[]) {
 		glColor3f(0.0, 0.0, 1.0);
 		glVertex3f(0., 1., 0.);
 		glEnd();
+		
+		// Dibujar un cubo para representar al personaje
+		glPushMatrix();
+		glTranslatef(characterPosition.x, characterPosition.y, characterPosition.z);
+		glColor3f(0.0, 1.0, 0.0);
+		drawCube();
+		glPopMatrix();
 		//FIN DIBUJAR OBJETOS
 
 		//MANEJO DE EVENTOS
 		while (SDL_PollEvent(&evento)){
+			// Procesar eventos para la cámara
+			camera.HandleEvent(evento);
+			
 			switch (evento.type) {
 			case SDL_MOUSEBUTTONDOWN:
 				rotate = true;
@@ -75,12 +137,25 @@ int main(int argc, char *argv[]) {
 			case SDL_QUIT:
 				fin = true;
 				break;
+			case SDL_KEYDOWN:
+				// Mover al personaje con teclas de flecha
+				if (evento.key.keysym.sym == SDLK_UP) {
+					characterPosition.z -= 0.1f;
+				}
+				else if (evento.key.keysym.sym == SDLK_DOWN) {
+					characterPosition.z += 0.1f;
+				}
+				else if (evento.key.keysym.sym == SDLK_LEFT) {
+					characterPosition.x -= 0.1f;
+				}
+				else if (evento.key.keysym.sym == SDLK_RIGHT) {
+					characterPosition.x += 0.1f;
+				}
+				break;
 			case SDL_KEYUP:
 				switch (evento.key.keysym.sym) {
 				case SDLK_ESCAPE:
 					fin = true;
-					break;
-				case SDLK_RIGHT:
 					break;
 				}
 			}
