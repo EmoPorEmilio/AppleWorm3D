@@ -7,6 +7,7 @@ public:
 
     GameObject(Vector3 position);
     virtual ~GameObject() = default;
-
+	void SetPosition(Vector3 position);
+	Vector3 GetPosition();
     virtual void draw() = 0;
 };

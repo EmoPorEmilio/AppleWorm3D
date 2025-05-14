@@ -213,6 +213,61 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
 void Game::loop() {
     bool running = true;
     SDL_Event event;
+    while (running) {
+        while (SDL_PollEvent(&event)) {
+            switch (event.type) {
+            case SDL_QUIT:
+                running = false;
+                break;
+            case SDL_WINDOWEVENT:
+                if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+                    width = event.window.data1;
+                    height = event.window.data2;
+                }
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                if (event.button.button == SDL_BUTTON_LEFT) {
+                    isDragging = true;
+                    lastMouseX = event.button.x;
+                    lastMouseY = event.button.y;
+                }
+                break;
+            case SDL_MOUSEBUTTONUP:
+                if (event.button.button == SDL_BUTTON_LEFT) {
+                    isDragging = false;
+                }
+                break;
+            case SDL_MOUSEMOTION:
+                if (isDragging) {
+                    int dx = event.motion.x - lastMouseX;
+                    int dy = event.motion.y - lastMouseY;
+                    camAngleY += dx;
+                    camAngleX += dy;
+                    if (camAngleX > 89) camAngleX = 89;
+                    if (camAngleX < -89) camAngleX = -89;
+                    lastMouseX = event.motion.x;
+                    lastMouseY = event.motion.y;
+                }
+                break;
+            case SDL_MOUSEWHEEL:
+                // Zoom in/out
+                radius -= event.wheel.y * 0.5f; // y > 0 is scroll up
+                if (radius < 2.0f) radius = 2.0f;
+                if (radius > 20.0f) radius = 20.0f;
+                break;
+            }
+        }
+
+        render(width, height);
+        SDL_GL_SwapWindow(window);
+        SDL_Delay(16); // ~60 FPS
+    }
+}
+
+/*intentando integrar cámara nueva void 
+Game::loop() {
+    bool running = true;
+    SDL_Event event;
     bool rotate = false;
     bool ctrlPressed = false;
     float degrees = 0;
@@ -275,7 +330,7 @@ void Game::loop() {
         SDL_GL_SwapWindow(window);
         SDL_Delay(16); // ~60 FPS
     }
-}
+}*/
 
 void Game::destroy() {
     SDL_GL_DeleteContext(glctx);

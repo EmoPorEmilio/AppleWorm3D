@@ -100,7 +100,6 @@
     <ClCompile Include="WormPart.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animateable.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Apple.h" />
     <ClInclude Include="Camera.h" />
