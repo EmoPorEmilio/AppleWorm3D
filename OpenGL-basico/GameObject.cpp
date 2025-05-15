@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-GameObject::GameObject(Vector3 position) : position(position) {
+GameObject::GameObject(Vector3 position) : position(position), animating(false) {
 }
 
 

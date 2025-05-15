@@ -23,7 +23,11 @@ void Game::loadGameObjectsFromXML(const char* filename) {
     TiXmlDocument doc(filename);
 
     if (doc.LoadFile()) {
+        float size = 0;
         TiXmlElement* element = doc.FirstChildElement();
+        element->QueryFloatAttribute("size", &size);
+        this->grid = new CubeGrid(size);
+        element = element->FirstChildElement();
         while (element != nullptr)
         {
             auto value = element->Value();
@@ -77,22 +81,25 @@ void Game::loadGameObjectsFromXML(const char* filename) {
                 this->grid->setObject(head, headPart);
                 this->grid->setObject(body, bodyPart);
                 this->grid->setObject(tail, tailPart);
-				gameObjects.push_back(headPart);
-                gameObjects.push_back(bodyPart);
-                gameObjects.push_back(tailPart);
+                this->gameObjects.push_back(headPart);
+                this->gameObjects.push_back(bodyPart);
+                this->gameObjects.push_back(tailPart);
                 this->worm = worm;
             }
             else if ((strcmp(value, "Terrain") == 0)) {
                 Terrain* terrain = new Terrain(Vector3(x, y, z));
-                gameObjects.push_back(terrain);
+                this->gameObjects.push_back(terrain);
+				this->grid->setObject(Vector3(x, y, z), terrain);
             }
             else if ((strcmp(value, "Apple") == 0)) {
                 Apple* apple = new Apple(Vector3(x, y, z));
-                gameObjects.push_back(apple);
+                this->gameObjects.push_back(apple);
+                this->grid->setObject(Vector3(x, y, z), apple);
             }
             else if ((strcmp(value, "Portal") == 0)) {
                 Portal* portal = new Portal(Vector3(x, y, z));
-                gameObjects.push_back(portal);
+                this->gameObjects.push_back(portal);
+                this->grid->setObject(Vector3(x, y, z), portal);
             }
 
             element = element->NextSiblingElement();
@@ -159,7 +166,7 @@ void Game::render(int width, int height) {
     float camZ = radius * cosf(camAngleY * 3.14159f / 180.0f) *
         cosf(camAngleX * 3.14159f / 180.0f);
 
-    gluLookAt(camX, camY, camZ, 0, 0, 0, 0, 1, 0);
+    gluLookAt(camX, camY, camZ, 10, 10, 10, 0, 1, 0);
 
     setupLighting();
 
@@ -239,40 +246,154 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
 }
 
 void Game::processKey(const SDL_Event& event) {
-    switch (event.key.keysym.sym) {
-    case SDLK_SPACE:
-        worm->calculateNewWormOrientation(WormCommand::MOVE_FORWARD);
-        worm->moveForward();
-        break;
-    case SDLK_UP:
-        worm->calculateNewWormOrientation(WormCommand::MOVE_UP);
-        worm->moveForward();
-        break;
-    case SDLK_DOWN:
-        worm->calculateNewWormOrientation(WormCommand::MOVE_DOWN);
-        worm->moveForward();
-        break;
-    case SDLK_RIGHT:
-        worm->calculateNewWormOrientation(WormCommand::MOVE_RIGHT);
-        worm->moveForward();
-        break;
-    case SDLK_LEFT:
-        worm->calculateNewWormOrientation(WormCommand::MOVE_LEFT);
-        worm->moveForward();
-        break;
-    case SDLK_f:
-        worm->fall();
-        break;
-    case SDLK_g:
-        //para el grow me faltaría actualizar game objects
-        //y todavía me queda resolver el cubegrid
-        worm->grow();
-        break;
+    if (this->gameState == GameState::WAITING_FOR_INPUT) {
+        this->gameState = GameState::PROCESSING;
+        switch (event.key.keysym.sym) {
+            case SDLK_SPACE:
+                if (this->willWormEatApple()) {
+                    this->growWorm();
+                }
+                else if (this->canWormMoveForward()) {
+                    this->worm->moveForward();
+                }
+                break;
+            case SDLK_UP:
+                this->worm->calculateNewWormOrientation(WormCommand::MOVE_UP);
+                if (this->willWormEatApple()) {
+                    this->growWorm();
+                }
+                else if (this->canWormMoveForward()) {
+                    this->worm->moveForward();
+                }
+                break;
+            case SDLK_DOWN:
+                this->worm->calculateNewWormOrientation(WormCommand::MOVE_DOWN);
+                if (this->willWormEatApple()) {
+                    this->growWorm();
+                }
+                else if (this->canWormMoveForward()) {
+                    this->worm->moveForward();
+                }
+                break;
+            case SDLK_RIGHT:
+                this->worm->calculateNewWormOrientation(WormCommand::MOVE_RIGHT);
+                if (this->willWormEatApple()) {
+                    this->growWorm();
+                }
+                else if (this->canWormMoveForward()) {
+                    this->worm->moveForward();
+                }
+                break;
+            case SDLK_LEFT:
+                this->worm->calculateNewWormOrientation(WormCommand::MOVE_LEFT);
+                if (this->willWormEatApple()) {
+                    this->growWorm();
+                }
+                else if (this->canWormMoveForward()) {
+                    this->worm->moveForward();
+                }
+                break;
+        }
+        this->gameState = GameState::WAITING_FOR_INPUT;
+		if (!this->isWormSupported()) {
+            this->gameState = GameState::FALLING;
+		}
+    }
+}
+
+bool Game::isWormSupported() {
+    //naive implementation
+    //por ahora chequeo todo cada vez, pero en mundo ideal en cada movimiento solo se deberían
+    //recalcular las posiciones que cambian, no todas
+    Vector3 headPosition = this->worm->head->GetPosition();
+    Vector3 headPositionDown = Vector3(headPosition.x, headPosition.y - 1, headPosition.z);
+    Vector3 tailPosition = this->worm->tail->GetPosition();
+    Vector3 tailPositionDown = Vector3(tailPosition.x, tailPosition.y - 1, tailPosition.z);
+    if (this->grid->at(headPositionDown)->canSupportWormWeight()) {
+        return true;
+    }
+    if (this->grid->at(tailPositionDown)->canSupportWormWeight()) {
+        return true;
+    }
+    for (auto& part : this->worm->body) {
+        Vector3 bodyPosition = part->GetPosition();
+        Vector3 bodyPositionDown = Vector3(bodyPosition.x, bodyPosition.y - 1, bodyPosition.z);
+        if (this->grid->at(bodyPosition)->canSupportWormWeight()) {
+            return true;
+        }
+    }
+    return false;
+};
+
+void Game::updateWormFallInCubeGrid() {
+	for (auto& part : this->worm->getParts()) {
+		Vector3 pos = part->GetPosition();
+		Vector3 newPos = Vector3(pos.x, pos.y - 1, pos.z);
+		this->grid->setObject(pos, nullptr);
+        this->grid->setObject(newPos, part);
+	}
+}
+
+void Game::fallWorm() {
+    if (!this->isWormSupported()) {
+        this->updateWormFallInCubeGrid();
+        this->worm->fall(); 
+        if (this->worm->tail->GetPosition().y < 5) {
+            this->gameState = GameState::YOU_LOSE;
+        }
     }
 }
 
 bool Game::canWormMoveForward() {
-    return true;
+    Vector3 nextPos = this->worm->getNextPosition();
+    CubeGridElement* slot = this->grid->at(nextPos);
+    bool isBlocked = slot->isBlockedByTerrain();
+    return !isBlocked;
+}
+
+bool Game::willWormEatApple() {
+    return this->grid->at(this->worm->getNextPosition())->hasApple();
+}
+
+void Game::removeGameObjectFromGameObjectsAndCubeGrid(GameObject* go, bool isWorm) {
+    auto it = std::find(gameObjects.begin(), gameObjects.end(), go);
+    if (it != gameObjects.end()) {
+        gameObjects.erase(it);
+    }
+    Vector3 pos = go->GetPosition();
+    this->grid->setObject(pos, nullptr);
+    if (!isWorm) { delete go; };
+}
+
+void Game::eatApple() {
+    GameObject* apple = this->grid->getObject(this->worm->getNextPosition());
+    this->removeGameObjectFromGameObjectsAndCubeGrid(apple, false);
+    this->score++;
+}
+
+void Game::addGameObjectToGameObjectsAndCubeGrid(GameObject* go) {
+    this->gameObjects.push_back(go);
+    this->grid->setObject(go->GetPosition(), go);
+}
+
+void Game::growWorm() {
+    this->eatApple();
+	WormPart* newPart = this->worm->grow();
+    this->addGameObjectToGameObjectsAndCubeGrid(newPart);
+}
+
+void Game::removeWormFromGameObjectsAndCubeGrid() {
+	std::vector<GameObject*> wormParts = this->worm->getParts();
+	for (auto& part : wormParts) {
+		this->removeGameObjectFromGameObjectsAndCubeGrid(part, true);
+	}
+}
+
+void Game::addWormToGameObjectsAndCubeGrid() {
+    std::vector<GameObject*> wormParts = this->worm->getParts();
+    for (auto& part : wormParts) {
+        gameObjects.push_back(part);
+    }
 }
 
 void Game::loop() {
@@ -323,6 +444,12 @@ void Game::loop() {
             case SDL_KEYUP:
                 this->processKey(event);
                 break;
+			}
+		}
+		if (this->gameState == GameState::FALLING) {
+			this->fallWorm();
+			if (this->isWormSupported()) {
+				this->gameState = GameState::WAITING_FOR_INPUT;
 			}
 		}
         render(width, height);

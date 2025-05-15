@@ -14,4 +14,5 @@ public:
 	GameObject* getObject();
 	bool isBlockedByTerrain();
 	bool canSupportWormWeight();
+	bool hasApple();
 };

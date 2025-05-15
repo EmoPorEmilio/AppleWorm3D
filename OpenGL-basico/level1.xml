@@ -1,34 +1,34 @@
 <?xml version="1.0" ?>
-<Worm>
-    <Head x="2" y="1" z="0"/>
-    <Body x="1" y="1" z="0"/>
-    <Tail x="0" y="1" z="0"/>
-    <OrientationForward x="1" y="0" z="0"/>
-    <OrientationUp x="0" y="1" z="0"/>
-</Worm>
-<!-- first row -->
-<Terrain x="0" y="0" z="0"/>
-<Terrain x="1" y="0" z="0"/>
-<Terrain x="2" y="0" z="0"/>
-<Terrain x="3" y="0" z="0"/>
-<Terrain x="4" y="0" z="0"/>
-<Terrain x="5" y="0" z="0"/>
+<Grid size="50">
+    <Worm>
+        <Head x="12" y="11" z="10"/>
+        <Body x="11" y="11" z="10"/>
+        <Tail x="10" y="11" z="10"/>
+        <OrientationForward x="1" y="0" z="0"/>
+        <OrientationUp x="0" y="1" z="0"/>
+    </Worm>
 
-<!-- second row -->
-<Terrain x="0" y="0" z="1"/>
-<Terrain x="1" y="0" z="1"/>
-<Terrain x="2" y="0" z="1"/>
-<Terrain x="3" y="0" z="1"/>
-<Terrain x="4" y="0" z="1"/>
-<Terrain x="5" y="0" z="1"/>
+    <Terrain x="10" y="10" z="10"/>
+    <Terrain x="11" y="10" z="10"/>
+    <Terrain x="12" y="10" z="10"/>
+    <Terrain x="13" y="10" z="10"/>
+    <Terrain x="14" y="10" z="10"/>
+    <Terrain x="15" y="10" z="10"/>
 
-<!-- third row -->
-<Terrain x="0" y="0" z="2"/>
-<Terrain x="1" y="0" z="2"/>
-<Terrain x="2" y="0" z="2"/>
-<Terrain x="3" y="0" z="2"/>
-<Terrain x="4" y="0" z="2"/>
-<Terrain x="5" y="0" z="2"/>
+    <Terrain x="10" y="10" z="11"/>
+    <Terrain x="11" y="10" z="11"/>
+    <Terrain x="12" y="10" z="11"/>
+    <Terrain x="13" y="10" z="11"/>
+    <Terrain x="14" y="10" z="11"/>
+    <Terrain x="15" y="10" z="11"/>
 
-<Apple x="0" y="1" z="2"/>
-<Portal x="5" y="1" z="0"/>
+    <Terrain x="10" y="10" z="12"/>
+    <Terrain x="11" y="10" z="12"/>
+    <Terrain x="12" y="10" z="12"/>
+    <Terrain x="13" y="10" z="12"/>
+    <Terrain x="14" y="10" z="12"/>
+    <Terrain x="15" y="10" z="12"/>
+
+    <Apple x="10" y="11" z="12"/>
+    <Portal x="15" y="11" z="10"/>
+</Grid>

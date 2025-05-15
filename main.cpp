@@ -11,8 +11,8 @@
 using namespace std;
 
 int width = 800, height = 600;
-float camAngleX = 20.0f, camAngleY = 30.0f;
-float radius = 5.0f;
+float camAngleX = 50.0f, camAngleY = 30.0f;
+float radius = 30.0f;
 int lastMouseX, lastMouseY;
 bool isDragging = false;
 

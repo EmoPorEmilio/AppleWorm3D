@@ -2,9 +2,10 @@
 #include "Vector3.h"
 
 class GameObject {
-public:
+private:
     Vector3 position;
-
+    bool animating;
+public:
     GameObject(Vector3 position);
     virtual ~GameObject() = default;
 	void SetPosition(Vector3 position);

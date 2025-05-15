@@ -8,5 +8,6 @@ Apple::Apple(Vector3 coordinates) : GameObject(coordinates) {
 }
 
 void Apple::draw() {
+	Vector3 position = this->GetPosition();
 	drawCube(position.x, position.y, position.z, 1.0f, Colors::RED);
 }

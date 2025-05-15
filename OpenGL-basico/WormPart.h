@@ -9,6 +9,7 @@ public:
     WormPartType type;
 
     WormPart(const Vector3 pos, WormPartType type);
+	void SetType(WormPartType type);
 
     void draw() override;
 };

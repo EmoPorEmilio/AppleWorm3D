@@ -31,7 +31,7 @@ GameObject* CubeGrid::getObject(Vector3 position) {
 }
 
 void CubeGrid::setObject(Vector3 position, GameObject* object) {
-	grid[position.x][position.y][position.z]->setObject(object);
+	grid[(int)position.x][(int)position.y][(int)position.z]->setObject(object);
 }
 
 CubeGrid::~CubeGrid() {
@@ -45,5 +45,9 @@ CubeGrid::~CubeGrid() {
 }
 
 CubeGridElement* CubeGrid::at(Vector3 position) {
-    return grid[position.x][position.y][position.z];
+    return grid[(int)position.x][(int)position.y][(int)position.z];
+}
+
+int CubeGrid::getSize() {
+    return this->gridSize;
 }

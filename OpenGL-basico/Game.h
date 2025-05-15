@@ -10,6 +10,8 @@ enum GameState {
     WAITING_FOR_INPUT,
     PROCESSING,
     FALLING,
+    YOU_WIN,
+    YOU_LOSE
 };
 
 class Game {
@@ -42,5 +44,15 @@ public:
     void drawAxis();
 	void loadGameObjectsFromXML(const char* filename);
     void processKey(const SDL_Event& event);
+    void removeWormFromGameObjectsAndCubeGrid();
+    void removeGameObjectFromGameObjectsAndCubeGrid(GameObject* go, bool isWorm);
+    void addGameObjectToGameObjectsAndCubeGrid(GameObject* go);
+	void addWormToGameObjectsAndCubeGrid();
+    void growWorm();
     bool canWormMoveForward();
+    bool willWormEatApple();
+    void eatApple();
+    void fallWorm();
+    void updateWormFallInCubeGrid();
+    bool isWormSupported();
 };

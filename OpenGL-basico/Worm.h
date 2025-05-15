@@ -29,6 +29,8 @@ public:
 
     void calculateNewWormOrientation(WormCommand command);
     void moveForward();
+    Vector3 getNextPosition();
+	std::vector<GameObject*> getParts();
     void fall();
-    void grow();
+    WormPart* grow();
 };

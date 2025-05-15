@@ -48,7 +48,7 @@ void Worm::calculateNewWormOrientation(WormCommand command) {
 
 void Worm::moveForward() {
     Vector3 prevPosition = this->head->GetPosition();
-    this->head->SetPosition(this->head->GetPosition() + this->orientationForward);
+    this->head->SetPosition(this->getNextPosition());
     for (auto& part : body) {
         Vector3 temp = part->GetPosition();
         part->SetPosition(prevPosition);
@@ -69,11 +69,25 @@ void Worm::fall() {
     }
 }
 
-void Worm::grow() {
+Vector3 Worm::getNextPosition() {
+    return this->head->GetPosition() + this->orientationForward;
+}
+
+WormPart* Worm::grow() {
 	Vector3 head = this->head->GetPosition();
-	WormPart* newBodyPart = new WormPart(head, WormPartType::Body);
-	std::cout << "New head position:" << head.x + orientationForward.x << ", " << head.y + orientationForward.y << ", " << head.z + orientationForward.z << std::endl;
-	std::cout << "New bodypart position: " << newBodyPart->GetPosition().x << ", " << newBodyPart->GetPosition().y << ", " << newBodyPart->GetPosition().z << std::endl;
-    this->head = new WormPart(Vector3(head.x+orientationForward.x, head.y + orientationForward.y, head.z + orientationForward.z), WormPartType::Head);
-	body.push_back(newBodyPart);
+	WormPart* newHead = new WormPart(this->getNextPosition(), WormPartType::Head);
+	this->head->SetType(WormPartType::Body);
+	this->body.insert(this->body.begin(), this->head);
+	this->head = newHead;
+	return newHead;
+}
+
+std::vector<GameObject*> Worm::getParts() {
+	std::vector<GameObject*> parts;
+	parts.push_back(this->head);
+	for (auto& part : body) {
+		parts.push_back(part);
+	}
+	parts.push_back(this->tail);
+	return parts;
 }
