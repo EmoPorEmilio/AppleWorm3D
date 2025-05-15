@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Vector3.h"
-#include "Animateable.h"
+#include "GameObject.h"
 
 #define ANIM_LINEAR 0
 #define ANIM_QUAD 1
@@ -10,7 +10,7 @@
 
 class Animator {
 private:
-	Animateable* go;
+	GameObject* go;
 	float timer;
 	float totalTimer;
 	Vector3 initPos;
@@ -20,10 +20,10 @@ private:
 	float acceleration;
 	void MovePosition();
 public:
-	Animator(Animateable* go);
+	Animator(GameObject* go);
 	Animator();
 	~Animator();
-	void AddAnimateable(Animateable* go);
+	void AddGameObject(GameObject* go);
 	bool IsAnimating();
 	void AnimateLinear(Vector3 initPos, Vector3 endPos, float time);
 	void AnimateQuad(Vector3 initPos, Vector3 endPos, Vector3 accel);

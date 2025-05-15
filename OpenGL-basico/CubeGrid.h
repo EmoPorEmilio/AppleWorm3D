@@ -14,6 +14,8 @@ public:
 
     CubeGridElement* at(Vector3 position);
 
+    GameObject* getObject(Vector3 position);
+	void setObject(Vector3 position, GameObject* object);
     CubeGrid(const CubeGrid&) = delete;
     CubeGrid& operator=(const CubeGrid&) = delete;
 };

@@ -26,6 +26,14 @@ CubeGrid::CubeGrid(int initialSize) : gridSize(initialSize) {
     }
 }
 
+GameObject* CubeGrid::getObject(Vector3 position) {
+	return grid[position.x][position.y][position.z]->getObject();
+}
+
+void CubeGrid::setObject(Vector3 position, GameObject* object) {
+	grid[position.x][position.y][position.z]->setObject(object);
+}
+
 CubeGrid::~CubeGrid() {
     for (size_t x = 0; x < grid.size(); ++x) {
         for (size_t y = 0; y < grid[x].size(); ++y) {

@@ -3,7 +3,7 @@
 
 class Portal : public GameObject {
 public:
+    Portal(Vector3 coordinates);
 
-    void draw() override {
-    }
+    void draw() override;
 };

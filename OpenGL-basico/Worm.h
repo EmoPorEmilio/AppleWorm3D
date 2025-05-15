@@ -3,23 +3,32 @@
 #include "WormPart.h"
 #include "Vector3.h"
 
+enum WormCommand {
+    MOVE_FORWARD,
+    MOVE_UP,
+    MOVE_DOWN,
+    MOVE_RIGHT,
+    MOVE_LEFT
+};
+
 class Worm {
 public:
-    WormPart head;
-    WormPart tail;
-    std::vector<WormPart> body;
-    Vector3 orientation; // Now just a single direction
+    WormPart* head;
+    WormPart* tail;
+    std::vector<WormPart*> body;
+    Vector3 orientationForward;
+    Vector3 orientationUp;
 
-    Worm(const Vector3 headPos,
-        const Vector3 bodyPos,
-        const Vector3 tailPos,
-        const Vector3 orientationVec)
-        : head(headPos, WormPartType::Head),
-        tail(tailPos, WormPartType::Tail),
-        body{ WormPart(bodyPos, WormPartType::Body) },
-        orientation(orientationVec)
-    {
-    }
+    Worm(WormPart* head,
+        WormPart* body,
+        WormPart* tail,
+        Vector3 orientationForward,
+        Vector3 orientationUp);
 
-    // Add methods for movement, growth, etc. as needed
+    void draw();
+
+    void calculateNewWormOrientation(WormCommand command);
+    void moveForward();
+    void fall();
+    void grow();
 };

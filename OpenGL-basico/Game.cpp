@@ -10,6 +10,8 @@
 #include "WormPart.h"
 #include "Worm.h"
 #include "Terrain.h"
+#include "Apple.h"
+#include "Portal.h"
 #include "GameObject.h"
 #include "Scene.h"
 #include "Camera.h"
@@ -18,62 +20,79 @@
 #include "Utils.h"
 
 void Game::loadGameObjectsFromXML(const char* filename) {
-    Worm* worm = nullptr;
     TiXmlDocument doc(filename);
 
     if (doc.LoadFile()) {
         TiXmlElement* element = doc.FirstChildElement();
         while (element != nullptr)
         {
-            std::string text = element->GetText() ? element->GetText() : "No text";
             auto value = element->Value();
-            std::cout << "Element Name: " << value << std::endl;
-
             float x = 0.0f, y = 0.0f, z = 0.0f;
             element->QueryFloatAttribute("x", &x);
             element->QueryFloatAttribute("y", &y);
             element->QueryFloatAttribute("z", &z);
 
-            std::cout << "x: " << x << ", y: " << y << ", z: " << z << std::endl;
-
             if (strcmp(value, "Worm") == 0) {
                 TiXmlElement* current_element = element->FirstChildElement();
-                Vector3 head(0, 0, 0), body(0, 0, 0), tail(0, 0, 0), orientation(0, 0, 0);
+                Vector3 head(0, 0, 0), body(0, 0, 0), tail(0, 0, 0), orientationForward(0, 0, 0), orientationUp(0, 0, 0);
                 while (current_element != nullptr) {
                     auto value = current_element->Value();
                     if (strcmp(value, "Head") == 0) {
-                        element->QueryFloatAttribute("x", &x);
-                        element->QueryFloatAttribute("y", &y);
-                        element->QueryFloatAttribute("z", &z);
+                        current_element->QueryFloatAttribute("x", &x);
+                        current_element->QueryFloatAttribute("y", &y);
+                        current_element->QueryFloatAttribute("z", &z);
                         head = Vector3(x, y, z);
                     }
                     else if (strcmp(value, "Body") == 0) {
-                        element->QueryFloatAttribute("x", &x);
-                        element->QueryFloatAttribute("y", &y);
-                        element->QueryFloatAttribute("z", &z);
+                        current_element->QueryFloatAttribute("x", &x);
+                        current_element->QueryFloatAttribute("y", &y);
+                        current_element->QueryFloatAttribute("z", &z);
                         body = Vector3(x, y, z);
                     }
                     else if (strcmp(value, "Tail") == 0) {
-                        element->QueryFloatAttribute("x", &x);
-                        element->QueryFloatAttribute("y", &y);
-                        element->QueryFloatAttribute("z", &z);
+                        current_element->QueryFloatAttribute("x", &x);
+                        current_element->QueryFloatAttribute("y", &y);
+                        current_element->QueryFloatAttribute("z", &z);
                         tail = Vector3(x, y, z);
                     }
-                    std::cout << "Child Element Name: " << value << ", Content: " << text << std::endl;
+					else if (strcmp(value, "OrientationForward") == 0) {
+                        current_element->QueryFloatAttribute("x", &x);
+                        current_element->QueryFloatAttribute("y", &y);
+                        current_element->QueryFloatAttribute("z", &z);
+						orientationForward = Vector3(x, y, z);
+					}
+                    else if (strcmp(value, "OrientationUp") == 0) {
+                        current_element->QueryFloatAttribute("x", &x);
+                        current_element->QueryFloatAttribute("y", &y);
+                        current_element->QueryFloatAttribute("z", &z);
+                        orientationUp = Vector3(x, y, z);
+                    }
                     current_element = current_element->NextSiblingElement();
                 }
-                worm = new Worm(head, body, tail, orientation);
+                WormPart* headPart = new WormPart(head, WormPartType::Head);
+                WormPart* bodyPart = new WormPart(body, WormPartType::Body);
+                WormPart* tailPart = new WormPart(tail, WormPartType::Tail);
 
+				Worm* worm = new Worm(headPart, bodyPart, tailPart, orientationForward, orientationUp);
+                this->grid->setObject(head, headPart);
+                this->grid->setObject(body, bodyPart);
+                this->grid->setObject(tail, tailPart);
+				gameObjects.push_back(headPart);
+                gameObjects.push_back(bodyPart);
+                gameObjects.push_back(tailPart);
+                this->worm = worm;
             }
-            else if (value == "Terrain") {
-
+            else if ((strcmp(value, "Terrain") == 0)) {
+                Terrain* terrain = new Terrain(Vector3(x, y, z));
+                gameObjects.push_back(terrain);
             }
-            else if (value == "Apple") {
-
+            else if ((strcmp(value, "Apple") == 0)) {
+                Apple* apple = new Apple(Vector3(x, y, z));
+                gameObjects.push_back(apple);
             }
-
-            else if (value == "Portal") {
-
+            else if ((strcmp(value, "Portal") == 0)) {
+                Portal* portal = new Portal(Vector3(x, y, z));
+                gameObjects.push_back(portal);
             }
 
             element = element->NextSiblingElement();
@@ -131,7 +150,7 @@ void Game::render(int width, int height) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    /*
+    
 
     // Camera orbit
     float camX = radius * sinf(camAngleY * 3.14159f / 180.0f) *
@@ -140,11 +159,17 @@ void Game::render(int width, int height) {
     float camZ = radius * cosf(camAngleY * 3.14159f / 180.0f) *
         cosf(camAngleX * 3.14159f / 180.0f);
 
-    gluLookAt(camX, camY, camZ, 0, 0, 0, 0, 1, 0);*/
+    gluLookAt(camX, camY, camZ, 0, 0, 0, 0, 1, 0);
 
     setupLighting();
 
     drawAxis();
+    
+	for (auto& gameObject : gameObjects) {
+		gameObject->draw();
+	}
+
+    /*
     drawCube(0, 1, 2, 1.0, Colors::RED);
     //first row
     drawCube(0, 0, 0, 1.0, Colors::BROWN);
@@ -172,7 +197,7 @@ void Game::render(int width, int height) {
     drawCube(2, 1, 0, 1.0, Colors::GREEN);
     drawCube(1, 1, 0, 1.0, Colors::GREEN);
     drawCube(0, 1, 0, 1.0, Colors::GREEN);
-    drawCube(5, 1, 0, 1.0, Colors::BLUE);
+    drawCube(5, 1, 0, 1.0, Colors::BLUE);*/
 }
 
 Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius, Camera* camera, Vector3 characterPosition)
@@ -190,7 +215,10 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
     window(nullptr),
     glctx(nullptr),
     grid(nullptr),
-	characterPosition(characterPosition)
+    characterPosition(characterPosition),
+    worm(nullptr),
+	gameObjects(std::vector <GameObject*>()),
+	gameState(WAITING_FOR_INPUT)
 {
     grid = new CubeGrid(gridSize);
     SDL_Init(SDL_INIT_VIDEO);
@@ -208,6 +236,43 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
     glctx = SDL_GL_CreateContext(window);
 
     glEnable(GL_DEPTH_TEST);
+}
+
+void Game::processKey(const SDL_Event& event) {
+    switch (event.key.keysym.sym) {
+    case SDLK_SPACE:
+        worm->calculateNewWormOrientation(WormCommand::MOVE_FORWARD);
+        worm->moveForward();
+        break;
+    case SDLK_UP:
+        worm->calculateNewWormOrientation(WormCommand::MOVE_UP);
+        worm->moveForward();
+        break;
+    case SDLK_DOWN:
+        worm->calculateNewWormOrientation(WormCommand::MOVE_DOWN);
+        worm->moveForward();
+        break;
+    case SDLK_RIGHT:
+        worm->calculateNewWormOrientation(WormCommand::MOVE_RIGHT);
+        worm->moveForward();
+        break;
+    case SDLK_LEFT:
+        worm->calculateNewWormOrientation(WormCommand::MOVE_LEFT);
+        worm->moveForward();
+        break;
+    case SDLK_f:
+        worm->fall();
+        break;
+    case SDLK_g:
+        //para el grow me faltaría actualizar game objects
+        //y todavía me queda resolver el cubegrid
+        worm->grow();
+        break;
+    }
+}
+
+bool Game::canWormMoveForward() {
+    return true;
 }
 
 void Game::loop() {
@@ -255,9 +320,11 @@ void Game::loop() {
                 if (radius < 2.0f) radius = 2.0f;
                 if (radius > 20.0f) radius = 20.0f;
                 break;
-            }
-        }
-
+            case SDL_KEYUP:
+                this->processKey(event);
+                break;
+			}
+		}
         render(width, height);
         SDL_GL_SwapWindow(window);
         SDL_Delay(16); // ~60 FPS

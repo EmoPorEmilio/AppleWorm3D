@@ -5,18 +5,13 @@
 #include "Apple.h"
 
 class CubeGridElement {
-public:
-	const Vector3 position;
-	CubeGridElement(Vector3 position);
 private:
-    GameObject* object;
-
-	/*
+	GameObject* object;
+	const Vector3 position;
+public:
+	CubeGridElement(Vector3 position);
 	void setObject(GameObject* obj);
-
 	GameObject* getObject();
-
 	bool isBlockedByTerrain();
-
-	bool canSupportWormWeight();*/
+	bool canSupportWormWeight();
 };

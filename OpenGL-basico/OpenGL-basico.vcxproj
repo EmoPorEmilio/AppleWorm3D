@@ -82,12 +82,14 @@
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Apple.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Colors.cpp" />
     <ClCompile Include="CubeGrid.cpp" />
     <ClCompile Include="CubeGridElement.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Portal.h" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Terrain.cpp" />

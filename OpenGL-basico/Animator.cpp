@@ -16,7 +16,7 @@ Animator::Animator() {
 	this->speed = 0;
 }
 
-Animator::Animator(Animateable* go) {
+Animator::Animator(GameObject* go) {
 	this->Animator::Animator();
 	this->go = go;
 }
@@ -25,7 +25,7 @@ Animator::~Animator() {
 	delete go;
 }
 
-void Animator::AddAnimateable(Animateable* go) {
+void Animator::AddGameObject(GameObject* go) {
 	this->go = go;
 }
 

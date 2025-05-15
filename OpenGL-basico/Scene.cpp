@@ -52,7 +52,7 @@ void Scene::AddFloor(std::vector<Vector3> positions) {
 }
 
 void Scene::AddSnake(std::vector<Vector3> position) {
-	this->worm = new Worm(position.at(0), position.at(1), position.at(2), position.at(3));
+	//this->worm = new Worm(position.at(0), position.at(1), position.at(2), position.at(3));
 	/*int j = position.size();
 
 	for (int i = 0; i < j; i++) {
