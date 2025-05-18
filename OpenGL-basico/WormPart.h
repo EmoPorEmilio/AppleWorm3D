@@ -1,10 +1,13 @@
 #pragma once
 #include "GameObject.h"
 #include "Vector3.h"
+#include "Animator.h"
 
 enum class WormPartType { Head, Body, Tail };
 
 class WormPart : public GameObject {
+private:
+    Animator* anim;
 public:
     WormPartType type;
 
@@ -12,4 +15,7 @@ public:
 	void SetType(WormPartType type);
 
     void draw() override;
+    void animatorMove(Vector3 newPosition);
+    void updateAnimator(float deltaTime);
+    bool isAnimating();
 };

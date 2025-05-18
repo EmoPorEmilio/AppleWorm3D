@@ -31,7 +31,7 @@ void Scene::Draw() {
 
 void Scene::Update(float deltaTime) {
 	size_t size = animators.size();
-	for (int i = 0; i < size; i++) {
+	for (size_t i = 0; i < size; i++) {
 		animators.at(i)->Update(deltaTime);
 	}
 	if (worm != NULL) {

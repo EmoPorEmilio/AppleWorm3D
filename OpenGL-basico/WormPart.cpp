@@ -6,14 +6,28 @@
 
 WormPart::WormPart(const Vector3 pos, WormPartType type)
     : GameObject(pos), type(type) {
+	this->anim = new Animator(this);
 }
 
 
 void WormPart::draw() {
 	Vector3 position = this->GetPosition();
 	drawCube(position.x, position.y, position.z, 1.0f, Colors::GREEN);
+	//std::cout << (int)type << "drawn at (" << position.x << "," << position.y << "," << position.z << ") \n";
 }
 
 void WormPart::SetType(WormPartType type) {
 	this->type = type;
+}
+
+void WormPart::animatorMove(Vector3 newPosition) {
+	anim->AnimateLinear(this->GetPosition(),newPosition,0.1f);
+}
+
+void WormPart::updateAnimator(float deltaTime) {
+	this->anim->Update(deltaTime);
+}
+
+bool WormPart::isAnimating() {
+	return this->anim->IsAnimating();
 }
