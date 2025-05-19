@@ -26,7 +26,7 @@ void Game::loadGameObjectsFromXML(const char* filename) {
         float size = 0;
         TiXmlElement* element = doc.FirstChildElement();
         element->QueryFloatAttribute("size", &size);
-        this->grid = new CubeGrid(size);
+        this->grid = new CubeGrid((int) size);
         element = element->FirstChildElement();
         while (element != nullptr)
         {
@@ -243,6 +243,11 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
     glctx = SDL_GL_CreateContext(window);
 
     glEnable(GL_DEPTH_TEST);
+
+    lastTimestamp = 0;
+    currentTimestamp = SDL_GetPerformanceCounter();
+
+    gameSpeed = 1;
 }
 
 void Game::processKey(const SDL_Event& event) {
@@ -252,52 +257,64 @@ void Game::processKey(const SDL_Event& event) {
             case SDLK_SPACE:
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
+                    this->gameState = GameState::ANIMATING;
                 }
                 break;
             case SDLK_UP:
                 this->worm->calculateNewWormOrientation(WormCommand::MOVE_UP);
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
+                    this->gameState = GameState::ANIMATING;
                 }
                 break;
             case SDLK_DOWN:
                 this->worm->calculateNewWormOrientation(WormCommand::MOVE_DOWN);
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
+                    this->gameState = GameState::ANIMATING;
                 }
                 break;
             case SDLK_RIGHT:
                 this->worm->calculateNewWormOrientation(WormCommand::MOVE_RIGHT);
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
+                    this->gameState = GameState::ANIMATING;
                 }
                 break;
             case SDLK_LEFT:
                 this->worm->calculateNewWormOrientation(WormCommand::MOVE_LEFT);
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
+                    this->gameState = GameState::ANIMATING;
                 }
                 break;
         }
-        this->gameState = GameState::WAITING_FOR_INPUT;
-		if (!this->isWormSupported()) {
-            this->gameState = GameState::FALLING;
-		}
+        if (gameState != GameState::ANIMATING) {
+            this->gameState = GameState::WAITING_FOR_INPUT;
+        }
+		//if (!this->isWormSupported()) {
+  //          this->gameState = GameState::FALLING;
+		//}
     }
 }
 
@@ -396,7 +413,14 @@ void Game::addWormToGameObjectsAndCubeGrid() {
     }
 }
 
+void Game::animateWorm(float deltaTime) {
+    this->worm->updateAnimation(deltaTime);
+}
+
 void Game::loop() {
+    lastTimestamp = currentTimestamp;
+    currentTimestamp = SDL_GetPerformanceCounter();
+    float deltaTime = (float)((currentTimestamp - lastTimestamp) / (double)SDL_GetPerformanceFrequency());
     bool running = true;
     SDL_Event event;
     while (running) {
@@ -451,10 +475,27 @@ void Game::loop() {
 			if (this->isWormSupported()) {
 				this->gameState = GameState::WAITING_FOR_INPUT;
 			}
-		}
+        }
+        else if (this->gameState == GameState::ANIMATING) {
+            this->worm->updateAnimation(deltaTime * gameSpeed);
+            if(!worm->isAnimating()){
+                if (!this->isWormSupported()) {
+                    this->gameState = GameState::FALLING;
+                }
+                else {
+                    this->gameState = GameState::WAITING_FOR_INPUT;
+                }
+            }
+        }
+        for (auto& go : gameObjects) {
+            if (go!= NULL && dynamic_cast<WormPart*>(go) == NULL) {
+                go->update(deltaTime * gameSpeed);
+            }
+            //gameObjects.push_back(part);
+        }
         render(width, height);
         SDL_GL_SwapWindow(window);
-        SDL_Delay(16); // ~60 FPS
+        //SDL_Delay(16); // ~60 FPS
     }
 }
 

@@ -48,13 +48,32 @@ void Worm::calculateNewWormOrientation(WormCommand command) {
 
 void Worm::moveForward() {
     Vector3 prevPosition = this->head->GetPosition();
-    this->head->SetPosition(this->getNextPosition());
+    //this->head->SetPosition(this->getNextPosition());
+    this->head->animatorMove(this->getNextPosition());
     for (auto& part : body) {
         Vector3 temp = part->GetPosition();
-        part->SetPosition(prevPosition);
+        part->animatorMove(prevPosition);
+        //part->SetPosition(prevPosition);
         prevPosition = temp;
     }
-    this->tail->SetPosition(prevPosition);
+    this->tail->animatorMove(prevPosition);
+    //this->tail->SetPosition(prevPosition);
+}
+
+void Worm::updateAnimation(float deltaTime) {
+    this->head->updateAnimator(deltaTime);
+    for (auto& part : body) {
+        part->updateAnimator(deltaTime);
+    }
+    this->tail->updateAnimator(deltaTime);
+}
+
+bool Worm::isAnimating() {
+    bool res = this->head->isAnimating() || this->tail->isAnimating();
+    for (auto& part : body) {
+        res = res || part->isAnimating();
+    }
+    return res;
 }
 
 void Worm::fall() {
@@ -75,7 +94,9 @@ Vector3 Worm::getNextPosition() {
 
 WormPart* Worm::grow() {
 	Vector3 head = this->head->GetPosition();
-	WormPart* newHead = new WormPart(this->getNextPosition(), WormPartType::Head);
+	//WormPart* newHead = new WormPart(this->getNextPosition(), WormPartType::Head);
+    WormPart* newHead = new WormPart(head, WormPartType::Head);
+    newHead->animatorMove(this->getNextPosition());
 	this->head->SetType(WormPartType::Body);
 	this->body.insert(this->body.begin(), this->head);
 	this->head = newHead;

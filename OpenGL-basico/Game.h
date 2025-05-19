@@ -11,7 +11,8 @@ enum GameState {
     PROCESSING,
     FALLING,
     YOU_WIN,
-    YOU_LOSE
+    YOU_LOSE,
+    ANIMATING //
 };
 
 class Game {
@@ -34,7 +35,9 @@ private:
     CubeGrid* grid;
     Vector3 characterPosition;
 	GameState gameState;
-
+    Uint64 currentTimestamp;
+    Uint64 lastTimestamp;
+    float gameSpeed;
 public:
     Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius, Camera* camera, Vector3 characterPosition);
     void loop();
@@ -55,4 +58,5 @@ public:
     void fallWorm();
     void updateWormFallInCubeGrid();
     bool isWormSupported();
+    void animateWorm(float deltaTime);
 };

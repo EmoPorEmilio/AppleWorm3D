@@ -33,4 +33,6 @@ public:
 	std::vector<GameObject*> getParts();
     void fall();
     WormPart* grow();
+    void updateAnimation(float deltaTime);
+    bool isAnimating();
 };

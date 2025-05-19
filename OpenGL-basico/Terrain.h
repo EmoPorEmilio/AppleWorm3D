@@ -6,4 +6,5 @@ public:
     Terrain(Vector3 coordinates);
 
     void draw() override;
+    void update(float deltaTime) override;
 };

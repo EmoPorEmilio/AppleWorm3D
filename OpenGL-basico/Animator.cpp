@@ -30,8 +30,11 @@ void Animator::AddGameObject(GameObject* go) {
 }
 
 bool Animator::IsAnimating() {
-	cout << (this->timer > 0);
-	return (this->timer > 0);
+	if (this->timer > 0) {
+		return true;
+	}
+	this->go->SetPosition(endPos);
+	return false;
 }
 
 void Animator::AnimateLinear(Vector3 initPos, Vector3 endPos, float time) {
@@ -43,17 +46,15 @@ void Animator::AnimateLinear(Vector3 initPos, Vector3 endPos, float time) {
 }
 
 void Animator::Update(float deltaTime) {
-	cout << timer << "," << deltaTime << "\n";
-
 	if (this->IsAnimating()) {
+		//cout << timer << endl;
 		this->timer = this->timer - deltaTime;
 		MovePosition();
 	}
 	else {
 		if (go != NULL) {
-			cout << "not null";
 			go->SetPosition(endPos);
-			//cout << "poition set";
+			
 		}
 	}
 }
@@ -61,13 +62,11 @@ void Animator::Update(float deltaTime) {
 void Animator::MovePosition() {
 	if (timer > 0) {
 		if (acceleration == 0 && go != NULL) {
+			//cout << "linear anim\n";
 			this->go->SetPosition(initPos + distance * ((totalTimer - timer) / totalTimer));
 		}
 		else if (acceleration > 0 && go != NULL) {
 			Vector3 newPos = initPos + distance.Normalized() * ((1 / (float)2) * acceleration * (totalTimer - timer) * (totalTimer - timer));
-			//cout << acceleration << " * ";
-			//cout << 1 / (float) 2 << " * ";
-			//cout << (totalTimer - timer) << "\n";
 			this->go->SetPosition(newPos);
 		}
 	}
@@ -81,10 +80,6 @@ void Animator::AnimateQuad(Vector3 initPos, Vector3 endPos, Vector3 accel) {
 	this->acceleration = a;
 	float xf = distance.Length();
 	this->timer = (sqrt((2 * xf) / (a)));
-	/*cout << "a = " << a << ", xf = " << xf << "\n";
-	cout << (sqrt((2 * xf) / (a))) << "/" << (a) << "\n";
-	cout << timer;
-	cout << "\n\n";*/
 	this->totalTimer = timer;
 	this->speed = 0;
 }
