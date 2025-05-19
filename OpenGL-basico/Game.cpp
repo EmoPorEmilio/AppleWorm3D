@@ -487,6 +487,13 @@ void Game::loop() {
                 }
             }
         }
+        std::cout << gameState;
+        for (auto& go : gameObjects) {
+            if (go!= NULL && dynamic_cast<WormPart*>(go) == NULL) {
+                go->update(deltaTime * gameSpeed);
+            }
+            //gameObjects.push_back(part);
+        }
         render(width, height);
         SDL_GL_SwapWindow(window);
         //SDL_Delay(16); // ~60 FPS

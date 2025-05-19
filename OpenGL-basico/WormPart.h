@@ -18,4 +18,5 @@ public:
     void animatorMove(Vector3 newPosition);
     void updateAnimator(float deltaTime);
     bool isAnimating();
+    void update(float deltaTime) override;
 };

@@ -11,4 +11,5 @@ public:
 	void SetPosition(Vector3 position);
 	Vector3 GetPosition();
     virtual void draw() = 0;
+    virtual void update(float deltaTime) = 0;
 };
