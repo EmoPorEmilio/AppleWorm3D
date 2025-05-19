@@ -487,7 +487,6 @@ void Game::loop() {
                 }
             }
         }
-        std::cout << gameState;
         for (auto& go : gameObjects) {
             if (go!= NULL && dynamic_cast<WormPart*>(go) == NULL) {
                 go->update(deltaTime * gameSpeed);
