@@ -318,7 +318,7 @@ bool Game::isWormSupported() {
     for (auto& part : this->worm->body) {
         Vector3 bodyPosition = part->GetPosition();
         Vector3 bodyPositionDown = Vector3(bodyPosition.x, bodyPosition.y - 1, bodyPosition.z);
-        if (this->grid->at(bodyPosition)->canSupportWormWeight()) {
+        if (this->grid->at(bodyPositionDown)->canSupportWormWeight()) {
             return true;
         }
     }
