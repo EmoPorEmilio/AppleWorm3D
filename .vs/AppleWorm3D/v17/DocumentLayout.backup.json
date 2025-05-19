@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Terrain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Portal.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Portal.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Terrain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -73,7 +73,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -81,7 +81,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Portal.h",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Portal.h",
               "RelativeDocumentMoniker": "OpenGL-basico\\Portal.h",
@@ -93,7 +93,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Portal.cpp",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Portal.cpp",
               "RelativeDocumentMoniker": "OpenGL-basico\\Portal.cpp",
@@ -105,15 +105,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Terrain.cpp",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.cpp",
               "RelativeDocumentMoniker": "OpenGL-basico\\Terrain.cpp",
               "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.cpp",
               "RelativeToolTip": "OpenGL-basico\\Terrain.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAlwCAAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-19T19:53:44.479Z"
+              "WhenOpened": "2025-05-19T19:53:44.479Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -129,16 +130,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Game.cpp",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.cpp",
               "RelativeDocumentMoniker": "OpenGL-basico\\Game.cpp",
               "ToolTip": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Game.cpp",
               "RelativeToolTip": "OpenGL-basico\\Game.cpp",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAAAGMAAACvAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAGMAAACvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-16T03:17:34.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T03:17:34.223Z"
             },
             {
               "$type": "Document",
@@ -214,7 +214,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Terrain.h",
               "DocumentMoniker": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\OpenGL-basico\\Terrain.h",
               "RelativeDocumentMoniker": "OpenGL-basico\\Terrain.h",

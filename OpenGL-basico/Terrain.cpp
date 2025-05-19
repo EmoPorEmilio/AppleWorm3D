@@ -31,3 +31,4 @@ Terrain::Terrain(Vector3 coordinates, const char* objPath, const char* texPath) 
     glShadeModel(GL_SMOOTH);
     LoadOBJ(objPath, terrainModel);
     terrainTexture = LoadTexture(texPath);
+}
