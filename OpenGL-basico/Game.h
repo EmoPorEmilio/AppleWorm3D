@@ -37,6 +37,7 @@ private:
 	GameState gameState;
     Uint64 currentTimestamp;
     Uint64 lastTimestamp;
+    float gameSpeed;
 public:
     Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius, Camera* camera, Vector3 characterPosition);
     void loop();

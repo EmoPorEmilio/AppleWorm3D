@@ -21,7 +21,7 @@ void WormPart::SetType(WormPartType type) {
 }
 
 void WormPart::animatorMove(Vector3 newPosition) {
-	anim->AnimateLinear(this->GetPosition(),newPosition,0.1f);
+	anim->AnimateLinear(this->GetPosition(),newPosition,0.3f);
 }
 
 void WormPart::updateAnimator(float deltaTime) {

@@ -246,6 +246,8 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
 
     lastTimestamp = 0;
     currentTimestamp = SDL_GetPerformanceCounter();
+
+    gameSpeed = 1;
 }
 
 void Game::processKey(const SDL_Event& event) {
@@ -255,6 +257,7 @@ void Game::processKey(const SDL_Event& event) {
             case SDLK_SPACE:
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
@@ -265,6 +268,7 @@ void Game::processKey(const SDL_Event& event) {
                 this->worm->calculateNewWormOrientation(WormCommand::MOVE_UP);
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
@@ -275,6 +279,7 @@ void Game::processKey(const SDL_Event& event) {
                 this->worm->calculateNewWormOrientation(WormCommand::MOVE_DOWN);
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
@@ -285,6 +290,7 @@ void Game::processKey(const SDL_Event& event) {
                 this->worm->calculateNewWormOrientation(WormCommand::MOVE_RIGHT);
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
@@ -295,6 +301,7 @@ void Game::processKey(const SDL_Event& event) {
                 this->worm->calculateNewWormOrientation(WormCommand::MOVE_LEFT);
                 if (this->willWormEatApple()) {
                     this->growWorm();
+                    this->gameState = GameState::ANIMATING;
                 }
                 else if (this->canWormMoveForward()) {
                     this->worm->moveForward();
@@ -470,7 +477,7 @@ void Game::loop() {
 			}
         }
         else if (this->gameState == GameState::ANIMATING) {
-            this->worm->updateAnimation(deltaTime);
+            this->worm->updateAnimation(deltaTime * gameSpeed);
             if(!worm->isAnimating()){
                 if (!this->isWormSupported()) {
                     this->gameState = GameState::FALLING;

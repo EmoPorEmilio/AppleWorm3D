@@ -94,7 +94,9 @@ Vector3 Worm::getNextPosition() {
 
 WormPart* Worm::grow() {
 	Vector3 head = this->head->GetPosition();
-	WormPart* newHead = new WormPart(this->getNextPosition(), WormPartType::Head);
+	//WormPart* newHead = new WormPart(this->getNextPosition(), WormPartType::Head);
+    WormPart* newHead = new WormPart(head, WormPartType::Head);
+    newHead->animatorMove(this->getNextPosition());
 	this->head->SetType(WormPartType::Body);
 	this->body.insert(this->body.begin(), this->head);
 	this->head = newHead;
