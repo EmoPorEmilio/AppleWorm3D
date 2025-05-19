@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "Terrain.h"
 #include "Apple.h"
+#include "Portal.h"
+#include "WormPart.h"
 
 class CubeGridElement {
 private:
@@ -12,7 +14,8 @@ public:
 	CubeGridElement(Vector3 position);
 	void setObject(GameObject* obj);
 	GameObject* getObject();
-	bool isBlockedByTerrain();
+	bool isBlocked();
 	bool canSupportWormWeight();
 	bool hasApple();
+	bool hasPortal();
 };

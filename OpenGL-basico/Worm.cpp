@@ -27,7 +27,7 @@ void Worm::draw() {
     }  
 }
 
-void Worm::calculateNewWormOrientation(WormCommand command) {
+void Worm::updateNewWormOrientation(WormCommand command) {
     Vector3 forward = this->orientationForward;
     Vector3 up = this->orientationUp;
     if (command == WormCommand::MOVE_RIGHT) {
@@ -40,9 +40,35 @@ void Worm::calculateNewWormOrientation(WormCommand command) {
         this->orientationForward = up;
         this->orientationUp = forward.operator*(-1.0);
     }
-	if (command == WormCommand::MOVE_DOWN) {
+    if (command == WormCommand::MOVE_DOWN) {
         this->orientationForward = up.operator*(-1.0);
         this->orientationUp = forward;
+    }
+}
+
+Vector3 Worm::calculateWormPotentialNextPosition(Vector3 orientation) {
+    Vector3 currentPos = this->head->GetPosition();
+    return currentPos.operator+(orientation);
+}
+
+Vector3 Worm::getOrientationForward() {
+    return this->orientationForward;
+}
+
+Vector3 Worm::calculateNewWormForwardOrientation(WormCommand command) {
+    Vector3 forward = this->orientationForward;
+    Vector3 up = this->orientationUp;
+    if (command == WormCommand::MOVE_RIGHT) {
+        return forward.Cross(up);
+    }
+    if (command == WormCommand::MOVE_LEFT) {
+        return up.Cross(forward);
+    }
+    if (command == WormCommand::MOVE_UP) {
+        return up;
+    }
+	if (command == WormCommand::MOVE_DOWN) {
+        return up.operator*(-1.0);
 	}
 }
 

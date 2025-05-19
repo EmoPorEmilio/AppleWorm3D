@@ -13,8 +13,8 @@ GameObject* CubeGridElement::getObject() {
 	return object;
 }
 
-bool CubeGridElement::isBlockedByTerrain() {
-	return dynamic_cast<Terrain*>(object) != nullptr;
+bool CubeGridElement::isBlocked() {
+	return (dynamic_cast<Terrain*>(object) != nullptr || dynamic_cast<WormPart*>(object) != nullptr);
 }
 
 bool CubeGridElement::canSupportWormWeight() {
@@ -23,4 +23,8 @@ bool CubeGridElement::canSupportWormWeight() {
 
 bool CubeGridElement::hasApple() {
 	return dynamic_cast<Apple*>(object) != nullptr;
+}
+
+bool CubeGridElement::hasPortal() {
+	return dynamic_cast<Portal*>(object) != nullptr;
 }

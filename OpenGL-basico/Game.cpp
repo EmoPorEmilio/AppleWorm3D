@@ -87,17 +87,17 @@ void Game::loadGameObjectsFromXML(const char* filename) {
                 this->worm = worm;
             }
             else if ((strcmp(value, "Terrain") == 0)) {
-                Terrain* terrain = new Terrain(Vector3(x, y, z));
+                Terrain* terrain = new Terrain(Vector3(x, y, z), "resources/terrain_cube_for_a_pl_0518160801_texture.obj", "resources/terrain_cube_for_a_pl_0518160801_texture.png");
                 this->gameObjects.push_back(terrain);
 				this->grid->setObject(Vector3(x, y, z), terrain);
             }
             else if ((strcmp(value, "Apple") == 0)) {
-                Apple* apple = new Apple(Vector3(x, y, z));
+                Apple* apple = new Apple(Vector3(x, y, z), "resources/polished_apple_glossy_0518183850_texture.obj", "resources/polished_apple_glossy_0518183850_texture.png");
                 this->gameObjects.push_back(apple);
                 this->grid->setObject(Vector3(x, y, z), apple);
             }
             else if ((strcmp(value, "Portal") == 0)) {
-                Portal* portal = new Portal(Vector3(x, y, z));
+                Portal* portal = new Portal(Vector3(x, y, z), "resources/circular_cosmic_porta_0518183805_texture.obj", "resources/circular_cosmic_porta_0518183805_texture.png");
                 this->gameObjects.push_back(portal);
                 this->grid->setObject(Vector3(x, y, z), portal);
             }
@@ -111,18 +111,34 @@ void Game::loadGameObjectsFromXML(const char* filename) {
 }
 
 void Game::setupLighting() {
-    //GLfloat light_pos[] = { 2.0f, 2.0f, 2.0f, 1.0f };
-    GLfloat light_amb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-    //GLfloat light_dif[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-    //GLfloat light_spe[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-
+    // Enable lighting and normalization
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
+    glEnable(GL_NORMALIZE);
+    glShadeModel(GL_SMOOTH);
 
-    //glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, light_amb);
-    //glLightfv(GL_LIGHT0, GL_DIFFUSE, light_dif);
-    //glLightfv(GL_LIGHT0, GL_SPECULAR, light_spe);
+    // Light 0 (main)
+    GLfloat light0_pos[] = { 15.0f, 15.0f, 12.0f, 1.0f };
+    GLfloat light0_amb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+    GLfloat light0_dif[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+    GLfloat light0_spe[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light0_amb);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light0_spe);
+
+    // Light 1 (fill)
+    GLfloat light1_pos[] = { -10.0f, 10.0f, 10.0f, 1.0f };
+    GLfloat light1_dif[] = { 0.4f, 0.4f, 0.4f, 1.0f };
+    glLightfv(GL_LIGHT1, GL_POSITION, light1_pos);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_dif);
+
+    // Material
+    GLfloat mat_amb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+    GLfloat mat_dif[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+    GLfloat mat_spe[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    GLfloat mat_shi[] = { 64.0f };
 }
 
 void Game::drawAxis(void)
@@ -157,8 +173,6 @@ void Game::render(int width, int height) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    
-
     // Camera orbit
     float camX = radius * sinf(camAngleY * 3.14159f / 180.0f) *
         cosf(camAngleX * 3.14159f / 180.0f);
@@ -175,36 +189,6 @@ void Game::render(int width, int height) {
 	for (auto& gameObject : gameObjects) {
 		gameObject->draw();
 	}
-
-    /*
-    drawCube(0, 1, 2, 1.0, Colors::RED);
-    //first row
-    drawCube(0, 0, 0, 1.0, Colors::BROWN);
-    drawCube(1, 0, 0, 1.0, Colors::BROWN);
-    drawCube(2, 0, 0, 1.0, Colors::BROWN);
-    drawCube(3, 0, 0, 1.0, Colors::BROWN);
-    drawCube(4, 0, 0, 1.0, Colors::BROWN);
-    drawCube(5, 0, 0, 1.0, Colors::BROWN);
-    //second row
-    drawCube(0, 0, 1, 1.0, Colors::BROWN);
-    drawCube(1, 0, 1, 1.0, Colors::BROWN);
-    drawCube(2, 0, 1, 1.0, Colors::BROWN);
-    drawCube(3, 0, 1, 1.0, Colors::BROWN);
-    drawCube(4, 0, 1, 1.0, Colors::BROWN);
-    drawCube(5, 0, 1, 1.0, Colors::BROWN);
-    //third row
-    drawCube(0, 0, 2, 1.0, Colors::BROWN);
-    drawCube(1, 0, 2, 1.0, Colors::BROWN);
-    drawCube(2, 0, 2, 1.0, Colors::BROWN);
-    drawCube(3, 0, 2, 1.0, Colors::BROWN);
-    drawCube(4, 0, 2, 1.0, Colors::BROWN);
-    drawCube(5, 0, 2, 1.0, Colors::BROWN);
-
-    //worm and apple
-    drawCube(2, 1, 0, 1.0, Colors::GREEN);
-    drawCube(1, 1, 0, 1.0, Colors::GREEN);
-    drawCube(0, 1, 0, 1.0, Colors::GREEN);
-    drawCube(5, 1, 0, 1.0, Colors::BLUE);*/
 }
 
 Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius, Camera* camera, Vector3 characterPosition)
@@ -253,57 +237,67 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
 void Game::processKey(const SDL_Event& event) {
     if (this->gameState == GameState::WAITING_FOR_INPUT) {
         this->gameState = GameState::PROCESSING;
+        Vector3 option;
         switch (event.key.keysym.sym) {
             case SDLK_SPACE:
-                if (this->willWormEatApple()) {
+                if (this->willWormEatApple(this->worm->getOrientationForward())) {
                     this->growWorm();
                     this->gameState = GameState::ANIMATING;
                 }
-                else if (this->canWormMoveForward()) {
+                else if (this->canWormMoveForward(this->worm->getOrientationForward())) {
                     this->worm->moveForward();
                     this->gameState = GameState::ANIMATING;
                 }
                 break;
             case SDLK_UP:
-                this->worm->calculateNewWormOrientation(WormCommand::MOVE_UP);
-                if (this->willWormEatApple()) {
+                option = this->worm->calculateNewWormForwardOrientation(WormCommand::MOVE_UP);
+                if (this->willWormEatApple(option)) {
+                    this->worm->updateNewWormOrientation(WormCommand::MOVE_UP);
                     this->growWorm();
                     this->gameState = GameState::ANIMATING;
                 }
-                else if (this->canWormMoveForward()) {
+                else if (this->canWormMoveForward(option)) {
+                    this->worm->updateNewWormOrientation(WormCommand::MOVE_UP);
                     this->worm->moveForward();
                     this->gameState = GameState::ANIMATING;
                 }
                 break;
             case SDLK_DOWN:
-                this->worm->calculateNewWormOrientation(WormCommand::MOVE_DOWN);
-                if (this->willWormEatApple()) {
+                option = this->worm->calculateNewWormForwardOrientation(WormCommand::MOVE_DOWN);
+                if (this->willWormEatApple(option)) {
+                    this->worm->updateNewWormOrientation(WormCommand::MOVE_DOWN);
                     this->growWorm();
                     this->gameState = GameState::ANIMATING;
                 }
-                else if (this->canWormMoveForward()) {
+                else if (this->canWormMoveForward(option)) {
+                    this->worm->updateNewWormOrientation(WormCommand::MOVE_DOWN);
                     this->worm->moveForward();
                     this->gameState = GameState::ANIMATING;
                 }
                 break;
             case SDLK_RIGHT:
-                this->worm->calculateNewWormOrientation(WormCommand::MOVE_RIGHT);
-                if (this->willWormEatApple()) {
+                option = this->worm->calculateNewWormForwardOrientation(WormCommand::MOVE_RIGHT);
+                if (this->willWormEatApple(option)) {
+                    this->worm->updateNewWormOrientation(WormCommand::MOVE_RIGHT);
                     this->growWorm();
                     this->gameState = GameState::ANIMATING;
                 }
-                else if (this->canWormMoveForward()) {
+                else if (this->canWormMoveForward(option)) {
+                    this->worm->updateNewWormOrientation(WormCommand::MOVE_RIGHT);
                     this->worm->moveForward();
                     this->gameState = GameState::ANIMATING;
                 }
                 break;
             case SDLK_LEFT:
-                this->worm->calculateNewWormOrientation(WormCommand::MOVE_LEFT);
-                if (this->willWormEatApple()) {
+                option = this->worm->calculateNewWormForwardOrientation(WormCommand::MOVE_LEFT);
+				std::cout << option.x << " " << option.y << " " << option.z << std::endl;
+                if (this->willWormEatApple(option)) {
+                    this->worm->updateNewWormOrientation(WormCommand::MOVE_LEFT);
                     this->growWorm();
                     this->gameState = GameState::ANIMATING;
                 }
-                else if (this->canWormMoveForward()) {
+                else if (this->canWormMoveForward(option)) {
+                    this->worm->updateNewWormOrientation(WormCommand::MOVE_LEFT);
                     this->worm->moveForward();
                     this->gameState = GameState::ANIMATING;
                 }
@@ -361,19 +355,20 @@ void Game::fallWorm() {
     }
 }
 
-bool Game::canWormMoveForward() {
-    Vector3 nextPos = this->worm->getNextPosition();
+bool Game::canWormMoveForward(Vector3 orientation) {
+    Vector3 nextPos = this->worm->calculateWormPotentialNextPosition(orientation);
     CubeGridElement* slot = this->grid->at(nextPos);
-    bool isBlocked = slot->isBlockedByTerrain();
-    return !isBlocked;
+    return !slot->isBlocked();
 }
 
-bool Game::willWormEatApple() {
-    return this->grid->at(this->worm->getNextPosition())->hasApple();
+bool Game::willWormEatApple(Vector3 orientation) {
+    Vector3 nextPos = this->worm->calculateWormPotentialNextPosition(orientation);
+    return this->grid->at(nextPos)->hasApple();
 }
 
 void Game::removeGameObjectFromGameObjectsAndCubeGrid(GameObject* go, bool isWorm) {
     auto it = std::find(gameObjects.begin(), gameObjects.end(), go);
+	std::cout << "Removing object: " << go->GetPosition().x << ", " << go->GetPosition().y << ", " << go->GetPosition().z << std::endl;
     if (it != gameObjects.end()) {
         gameObjects.erase(it);
     }

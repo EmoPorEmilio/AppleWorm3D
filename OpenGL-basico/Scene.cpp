@@ -44,11 +44,12 @@ void Scene::AddGameObject(GameObject* gameObject) {
 	gameObjects.push_back(gameObject);
 }
 
-void Scene::AddFloor(std::vector<Vector3> positions) {
+
+void Scene::AddFloor(std::vector<Vector3> positions) {/*
 	for (int i = 0; i < positions.size(); i++) {
 		Terrain* terrain = new Terrain(positions[i]);
 		this->AddGameObject(terrain);
-	}
+	}*/
 }
 
 void Scene::AddSnake(std::vector<Vector3> position) {
