@@ -17,6 +17,7 @@ int lastMouseX, lastMouseY;
 bool isDragging = false;
 
 int main(int argc, char* argv[]) {
+    FreeImage_Initialise();
     Vector3 characterPosition(0.0f, 0.0f, 0.0f);
     Camera* camera = new Camera();
     camera->Initialize(0.0f, 0.0f, 5.0f);
@@ -25,6 +26,6 @@ int main(int argc, char* argv[]) {
     game.loadGameObjectsFromXML("level1.xml");
     game.loop();
     game.destroy();
-    return 0;
+    FreeImage_DeInitialise();
     return 0;
 }

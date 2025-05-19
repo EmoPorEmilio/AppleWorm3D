@@ -1,9 +1,12 @@
 #pragma once
 #include "GameObject.h"
+#include "Utils.h"
 
 class Terrain : public GameObject {
 public:
-    Terrain(Vector3 coordinates);
+    ObjModel terrainModel;
+    GLuint terrainTexture;
+    Terrain(Vector3 coordinates, const char* objPath, const char* texPath);
 
     void draw() override;
 };

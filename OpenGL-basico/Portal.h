@@ -1,9 +1,12 @@
 #pragma once
 #include "GameObject.h"
+#include "Utils.h"
 
 class Portal : public GameObject {
 public:
-    Portal(Vector3 coordinates);
+    ObjModel portalModel;
+    GLuint portalTexture;
+    Portal(Vector3 coordinates, const char* objPath, const char* texPath);
 
     void draw() override;
 };

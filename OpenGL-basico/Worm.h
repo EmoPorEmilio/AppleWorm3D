@@ -27,7 +27,10 @@ public:
 
     void draw();
 
-    void calculateNewWormOrientation(WormCommand command);
+	void updateNewWormOrientation(WormCommand command);
+    Vector3 calculateNewWormForwardOrientation(WormCommand command);
+    Vector3 calculateWormPotentialNextPosition(Vector3 orientation);
+    Vector3 getOrientationForward();
     void moveForward();
     Vector3 getNextPosition();
 	std::vector<GameObject*> getParts();

@@ -49,8 +49,8 @@ public:
     void addGameObjectToGameObjectsAndCubeGrid(GameObject* go);
 	void addWormToGameObjectsAndCubeGrid();
     void growWorm();
-    bool canWormMoveForward();
-    bool willWormEatApple();
+    bool canWormMoveForward(Vector3 orientation);
+    bool willWormEatApple(Vector3 orientation);
     void eatApple();
     void fallWorm();
     void updateWormFallInCubeGrid();
