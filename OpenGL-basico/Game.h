@@ -59,4 +59,5 @@ public:
     void updateWormFallInCubeGrid();
     bool isWormSupported();
     void animateWorm(float deltaTime);
+    void updateWormReferences();
 };

@@ -10,6 +10,7 @@
 #include "WormPart.h"
 #include "Worm.h"
 #include "Terrain.h"
+#include "Lava.h"
 #include "Apple.h"
 #include "Portal.h"
 #include "GameObject.h"
@@ -100,6 +101,11 @@ void Game::loadGameObjectsFromXML(const char* filename) {
                 Portal* portal = new Portal(Vector3(x, y, z), "resources/circular_cosmic_porta_0518183805_texture.obj", "resources/circular_cosmic_porta_0518183805_texture.png");
                 this->gameObjects.push_back(portal);
                 this->grid->setObject(Vector3(x, y, z), portal);
+            }
+            else if ((strcmp(value, "Lava") == 0)) {
+                Lava* lava = new Lava(Vector3(x, y, z), "resources/lava_cube_0518183714_texture.obj", "resources/lava_cube_0518183714_texture.png");
+                this->gameObjects.push_back(lava);
+                this->grid->setObject(Vector3(x, y, z), lava);
             }
 
             element = element->NextSiblingElement();
@@ -231,7 +237,7 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
     lastTimestamp = 0;
     currentTimestamp = SDL_GetPerformanceCounter();
 
-    gameSpeed = 1;
+    gameSpeed = 0.001;
 }
 
 void Game::processKey(const SDL_Event& event) {
@@ -247,6 +253,7 @@ void Game::processKey(const SDL_Event& event) {
                 else if (this->canWormMoveForward(this->worm->getOrientationForward())) {
                     this->worm->moveForward();
                     this->gameState = GameState::ANIMATING;
+                    this->updateWormReferences();
                 }
                 break;
             case SDLK_UP:
@@ -259,6 +266,7 @@ void Game::processKey(const SDL_Event& event) {
                 else if (this->canWormMoveForward(option)) {
                     this->worm->updateNewWormOrientation(WormCommand::MOVE_UP);
                     this->worm->moveForward();
+                    this->updateWormReferences();
                     this->gameState = GameState::ANIMATING;
                 }
                 break;
@@ -272,6 +280,7 @@ void Game::processKey(const SDL_Event& event) {
                 else if (this->canWormMoveForward(option)) {
                     this->worm->updateNewWormOrientation(WormCommand::MOVE_DOWN);
                     this->worm->moveForward();
+                    this->updateWormReferences();
                     this->gameState = GameState::ANIMATING;
                 }
                 break;
@@ -285,6 +294,7 @@ void Game::processKey(const SDL_Event& event) {
                 else if (this->canWormMoveForward(option)) {
                     this->worm->updateNewWormOrientation(WormCommand::MOVE_RIGHT);
                     this->worm->moveForward();
+                    this->updateWormReferences();
                     this->gameState = GameState::ANIMATING;
                 }
                 break;
@@ -299,6 +309,7 @@ void Game::processKey(const SDL_Event& event) {
                 else if (this->canWormMoveForward(option)) {
                     this->worm->updateNewWormOrientation(WormCommand::MOVE_LEFT);
                     this->worm->moveForward();
+                    this->updateWormReferences();
                     this->gameState = GameState::ANIMATING;
                 }
                 break;
@@ -343,6 +354,11 @@ void Game::updateWormFallInCubeGrid() {
 		this->grid->setObject(pos, nullptr);
         this->grid->setObject(newPos, part);
 	}
+}
+
+void Game::updateWormReferences() {
+    this->removeWormFromGameObjectsAndCubeGrid();
+    this->addWormToGameObjectsAndCubeGrid();
 }
 
 void Game::fallWorm() {
@@ -391,7 +407,7 @@ void Game::addGameObjectToGameObjectsAndCubeGrid(GameObject* go) {
 void Game::growWorm() {
     this->eatApple();
 	WormPart* newPart = this->worm->grow();
-    this->addGameObjectToGameObjectsAndCubeGrid(newPart);
+    this->updateWormReferences();
 }
 
 void Game::removeWormFromGameObjectsAndCubeGrid() {

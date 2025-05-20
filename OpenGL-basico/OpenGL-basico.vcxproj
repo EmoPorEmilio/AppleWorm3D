@@ -89,6 +89,7 @@
     <ClCompile Include="CubeGridElement.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Lava.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Portal.h" />
     <ClCompile Include="Scene.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ICameraStrategy.h" />
+    <ClInclude Include="Lava.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SideCameraStrategy.h" />
     <ClInclude Include="Utils.h" />
