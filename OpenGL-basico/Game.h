@@ -27,6 +27,8 @@ private:
     int lastMouseX;
     int lastMouseY;
     bool isDragging;
+    float degrees;
+    bool rotate;
     Worm* worm;
     std::vector<GameObject*> gameObjects;
 	Camera* camera;

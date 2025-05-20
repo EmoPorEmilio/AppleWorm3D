@@ -179,14 +179,16 @@ void Game::render(int width, int height) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    // Camera orbit
-    float camX = radius * sinf(camAngleY * 3.14159f / 180.0f) *
-        cosf(camAngleX * 3.14159f / 180.0f);
-    float camY = radius * sinf(camAngleX * 3.14159f / 180.0f);
-    float camZ = radius * cosf(camAngleY * 3.14159f / 180.0f) *
-        cosf(camAngleX * 3.14159f / 180.0f);
+    // Actualizar la cámara (especialmente importante para modo de seguimiento)
+    camera->Update();
 
-    gluLookAt(camX, camY, camZ, 10, 10, 10, 0, 1, 0);
+    // Aplicar la cámara
+    camera->Apply();
+
+    if (this->rotate) {
+        this->degrees = degrees + 0.1f;
+    }
+    glRotatef(this->degrees, 0.0, 1.0, 0.0);
 
     setupLighting();
 
@@ -202,6 +204,8 @@ Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY
     step(0),
     width(width),
     height(height),
+    rotate(false),
+    degrees(0),
     camAngleX(camAngleX),
     camAngleY(camAngleY),
     radius(radius),
@@ -428,7 +432,7 @@ void Game::animateWorm(float deltaTime) {
     this->worm->updateAnimation(deltaTime);
 }
 
-void Game::loop() {
+/*void Game::loop() {
     lastTimestamp = currentTimestamp;
     currentTimestamp = SDL_GetPerformanceCounter();
     float deltaTime = (float)((currentTimestamp - lastTimestamp) / (double)SDL_GetPerformanceFrequency());
@@ -508,17 +512,18 @@ void Game::loop() {
         SDL_GL_SwapWindow(window);
         //SDL_Delay(16); // ~60 FPS
     }
-}
+}*/
 
-/*intentando integrar cámara nueva void 
-Game::loop() {
+
+void Game::loop() {
     bool running = true;
     SDL_Event event;
-    bool rotate = false;
     bool ctrlPressed = false;
-    float degrees = 0;
 
-    //SDL_SetRelativeMouseMode(SDL_TRUE);
+    lastTimestamp = currentTimestamp;
+    currentTimestamp = SDL_GetPerformanceCounter();
+    float deltaTime = (float)((currentTimestamp - lastTimestamp) / (double)SDL_GetPerformanceFrequency());
+
     while (running) {
         while (SDL_PollEvent(&event)) {
             // Procesar eventos para la cámara
@@ -528,17 +533,23 @@ Game::loop() {
             case SDL_MOUSEBUTTONDOWN:
                 // Solo activar rotación si CTRL está presionado
                 if (ctrlPressed) {
-                    rotate = true;
+                    this->rotate = true;
                     std::cout << "ROT\n";
                 }
                 break;
             case SDL_MOUSEBUTTONUP:
                 if (ctrlPressed) {
-                    rotate = false;
+                    this->rotate = false;
                 }
                 break;
             case SDL_QUIT:
                 running = false;
+                break;
+            case SDL_WINDOWEVENT:
+                if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+                    width = event.window.data1;
+                    height = event.window.data2;
+                }
                 break;
             case SDL_KEYDOWN:
                 // Comprobar CTRL
@@ -560,10 +571,11 @@ Game::loop() {
                 }
                 break;
             case SDL_KEYUP:
+                this->processKey(event);
                 if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL) {
                     ctrlPressed = false;
                     // Si soltamos CTRL, también dejamos de rotar
-                    rotate = false;
+                    this->rotate = false;
                 }
                 else if (event.key.keysym.sym == SDLK_ESCAPE) {
                     running = false;
@@ -576,7 +588,7 @@ Game::loop() {
         SDL_GL_SwapWindow(window);
         SDL_Delay(16); // ~60 FPS
     }
-}*/
+}
 
 void Game::destroy() {
     SDL_GL_DeleteContext(glctx);

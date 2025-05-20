@@ -13,12 +13,10 @@ using namespace std;
 int width = 800, height = 600;
 float camAngleX = 50.0f, camAngleY = 30.0f;
 float radius = 30.0f;
-int lastMouseX, lastMouseY;
-bool isDragging = false;
 
 int main(int argc, char* argv[]) {
     FreeImage_Initialise();
-    Vector3 characterPosition(0.0f, 0.0f, 0.0f);
+    Vector3 characterPosition(15.0f, 11.0f, 10.0f);
     Camera* camera = new Camera();
     camera->Initialize(0.0f, 0.0f, 5.0f);
     camera->SetCharacterReference(&characterPosition);
