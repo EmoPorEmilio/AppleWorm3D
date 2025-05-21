@@ -59,7 +59,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>FreeImage.lib;opengl32.lib;glu32.lib;SDL2.lib;SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>FreeImage.lib;opengl32.lib;glu32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -90,14 +90,18 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Lava.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Portal.h" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="LevelSelectionScreen.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="tinyxml\tinystr.cpp" />
     <ClCompile Include="tinyxml\tinyxml.cpp" />
     <ClCompile Include="tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Worm.cpp" />
     <ClCompile Include="WormPart.cpp" />
@@ -115,8 +119,13 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ICameraStrategy.h" />
     <ClInclude Include="Lava.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="LevelSelectionScreen.h" />
+    <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="SideCameraStrategy.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="FontManager.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Worm.h" />

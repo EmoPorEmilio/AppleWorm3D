@@ -1,10 +1,12 @@
 #include "SDL.h"
 #include "SDL_opengl.h"
+#include <SDL_ttf.h>
 #include <iostream>
 #include "FreeImage.h"
 #include <stdio.h>
 #include <conio.h>
 #include <GL/glu.h>
+#include <string>
 #include "Game.h"
 #include "Colors.h"
 #include "WormPart.h"
@@ -19,6 +21,10 @@
 #include "CubeGrid.h"
 #include "tinyxml/tinyxml.h"
 #include "Utils.h"
+
+SDL_Rect resumeButtonRect;
+SDL_Rect mainMenuButtonRect;
+SDL_Rect exitButtonRect;
 
 void Game::loadGameObjectsFromXML(const char* filename) {
     TiXmlDocument doc(filename);
@@ -41,32 +47,32 @@ void Game::loadGameObjectsFromXML(const char* filename) {
                 TiXmlElement* current_element = element->FirstChildElement();
                 Vector3 head(0, 0, 0), body(0, 0, 0), tail(0, 0, 0), orientationForward(0, 0, 0), orientationUp(0, 0, 0);
                 while (current_element != nullptr) {
-                    auto value = current_element->Value();
-                    if (strcmp(value, "Head") == 0) {
+                    auto current_tag_value = current_element->Value();
+                    if (strcmp(current_tag_value, "Head") == 0) {
                         current_element->QueryFloatAttribute("x", &x);
                         current_element->QueryFloatAttribute("y", &y);
                         current_element->QueryFloatAttribute("z", &z);
                         head = Vector3(x, y, z);
                     }
-                    else if (strcmp(value, "Body") == 0) {
+                    else if (strcmp(current_tag_value, "Body") == 0) {
                         current_element->QueryFloatAttribute("x", &x);
                         current_element->QueryFloatAttribute("y", &y);
                         current_element->QueryFloatAttribute("z", &z);
                         body = Vector3(x, y, z);
                     }
-                    else if (strcmp(value, "Tail") == 0) {
+                    else if (strcmp(current_tag_value, "Tail") == 0) {
                         current_element->QueryFloatAttribute("x", &x);
                         current_element->QueryFloatAttribute("y", &y);
                         current_element->QueryFloatAttribute("z", &z);
                         tail = Vector3(x, y, z);
                     }
-					else if (strcmp(value, "OrientationForward") == 0) {
+					else if (strcmp(current_tag_value, "OrientationForward") == 0) {
                         current_element->QueryFloatAttribute("x", &x);
                         current_element->QueryFloatAttribute("y", &y);
                         current_element->QueryFloatAttribute("z", &z);
 						orientationForward = Vector3(x, y, z);
 					}
-                    else if (strcmp(value, "OrientationUp") == 0) {
+                    else if (strcmp(current_tag_value, "OrientationUp") == 0) {
                         current_element->QueryFloatAttribute("x", &x);
                         current_element->QueryFloatAttribute("y", &y);
                         current_element->QueryFloatAttribute("z", &z);
@@ -78,14 +84,14 @@ void Game::loadGameObjectsFromXML(const char* filename) {
                 WormPart* bodyPart = new WormPart(body, WormPartType::Body);
                 WormPart* tailPart = new WormPart(tail, WormPartType::Tail);
 
-				Worm* worm = new Worm(headPart, bodyPart, tailPart, orientationForward, orientationUp);
+				Worm* newWorm = new Worm(headPart, bodyPart, tailPart, orientationForward, orientationUp);
                 this->grid->setObject(head, headPart);
                 this->grid->setObject(body, bodyPart);
                 this->grid->setObject(tail, tailPart);
                 this->gameObjects.push_back(headPart);
                 this->gameObjects.push_back(bodyPart);
                 this->gameObjects.push_back(tailPart);
-                this->worm = worm;
+                this->worm = newWorm;
             }
             else if ((strcmp(value, "Terrain") == 0)) {
                 Terrain* terrain = new Terrain(Vector3(x, y, z), "resources/terrain_cube_for_a_pl_0518160801_texture.obj", "resources/terrain_cube_for_a_pl_0518160801_texture.png");
@@ -112,19 +118,17 @@ void Game::loadGameObjectsFromXML(const char* filename) {
         }
     }
     else {
-        std::cerr << "Failed to load XML file: " << doc.ErrorDesc() << std::endl;
+        std::cerr << "Failed to load XML file: " << filename << " - " << doc.ErrorDesc() << std::endl;
     }
 }
 
 void Game::setupLighting() {
-    // Enable lighting and normalization
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
     glEnable(GL_NORMALIZE);
     glShadeModel(GL_SMOOTH);
 
-    // Light 0 (main)
     GLfloat light0_pos[] = { 15.0f, 15.0f, 12.0f, 1.0f };
     GLfloat light0_amb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
     GLfloat light0_dif[] = { 0.8f, 0.8f, 0.8f, 1.0f };
@@ -134,118 +138,295 @@ void Game::setupLighting() {
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif);
     glLightfv(GL_LIGHT0, GL_SPECULAR, light0_spe);
 
-    // Light 1 (fill)
     GLfloat light1_pos[] = { -10.0f, 10.0f, 10.0f, 1.0f };
     GLfloat light1_dif[] = { 0.4f, 0.4f, 0.4f, 1.0f };
     glLightfv(GL_LIGHT1, GL_POSITION, light1_pos);
     glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_dif);
-
-    // Material
-    GLfloat mat_amb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-    GLfloat mat_dif[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-    GLfloat mat_spe[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    GLfloat mat_shi[] = { 64.0f };
 }
 
 void Game::drawAxis(void)
 {
-    glDisable(GL_LIGHTING);
+    GLboolean lightingEnabled;
+    glGetBooleanv(GL_LIGHTING, &lightingEnabled);
+    if (lightingEnabled) glDisable(GL_LIGHTING);
+
     glBegin(GL_LINES);
-    glColor3f(1, 0, 0);
-    glVertex3f(-50, 0, 0);
-    glVertex3f(50, 0, 0);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(-50.0f, 0.0f, 0.0f);
+    glVertex3f(50.0f, 0.0f, 0.0f);
 
-    glColor3f(0, 1, 0);
-    glVertex3f(0, -50, 0);
-    glVertex3f(0, 50, 0);
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glVertex3f(0.0f, -50.0f, 0.0f);
+    glVertex3f(0.0f, 50.0f, 0.0f);
 
-    glColor3f(0, 0, 1);
-    glVertex3f(0, 0, -50);
-    glVertex3f(0, 0, 50);
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glVertex3f(0.0f, 0.0f, -50.0f);
+    glVertex3f(0.0f, 0.0f, 50.0f);
     glEnd();
+
+    if (lightingEnabled) glEnable(GL_LIGHTING);
+}
+
+void Game::clearTextCache() {
+    if (textTextureCache != 0) {
+        glDeleteTextures(1, &textTextureCache);
+        textTextureCache = 0;
+    }
+}
+
+void Game::drawTextGame(const char* text, float x, float y, SDL_Color color, bool useCache) {
+    if (!gameFont) return;
+    if (text == nullptr || *text == '\0') return;
+
+    SDL_Surface* textSurface = TTF_RenderUTF8_Blended(gameFont, text, color);
+    if (!textSurface) {
+        std::cerr << "TTF_RenderUTF8_Blended error: " << TTF_GetError() << std::endl;
+        return;
+    }
+
+    bool needsNewTexture = !useCache || (useCache && textTextureCache == 0);
+
+    if (needsNewTexture) {
+        if (textTextureCache != 0) {
+            glDeleteTextures(1, &textTextureCache);
+            textTextureCache = 0;
+        }
+        glGenTextures(1, &textTextureCache); 
+        glBindTexture(GL_TEXTURE_2D, textTextureCache);
+        
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textSurface->w, textSurface->h, 0,
+                     GL_BGRA, 
+                     GL_UNSIGNED_BYTE, textSurface->pixels);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        
+        textWidthCache = textSurface->w;
+        textHeightCache = textSurface->h;
+    } else {
+        glBindTexture(GL_TEXTURE_2D, textTextureCache);
+    }
+
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0, this->width, 0, this->height); 
+    
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+
+    GLboolean lightingWasOnText;
+    glGetBooleanv(GL_LIGHTING, &lightingWasOnText);
+    if (lightingWasOnText) {
+        glDisable(GL_LIGHTING);
+    }
+    GLboolean depthTestWasOnText;
+    glGetBooleanv(GL_DEPTH_TEST, &depthTestWasOnText);
+    if (depthTestWasOnText) {
+         glDisable(GL_DEPTH_TEST);
+    }
+
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+    float oglY = this->height - y - textHeightCache; 
+
+    glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 1.0f); glVertex2f(x, oglY);
+        glTexCoord2f(1.0f, 1.0f); glVertex2f(x + textWidthCache, oglY);
+        glTexCoord2f(1.0f, 0.0f); glVertex2f(x + textWidthCache, oglY + textHeightCache);
+        glTexCoord2f(0.0f, 0.0f); glVertex2f(x, oglY + textHeightCache);
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
+    
+    if (depthTestWasOnText) {
+         glEnable(GL_DEPTH_TEST);
+    }
+    if (lightingWasOnText) {
+        glEnable(GL_LIGHTING);
+    }
+
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+
+    SDL_FreeSurface(textSurface);
+}
+
+void Game::renderHUD() {
+    std::string hudText = std::to_string(hudDisplayNumber);
+    float x = 10.0f;
+    float y = 10.0f; 
+    drawTextGame(hudText.c_str(), x, y, textColor, false);
+}
+
+void Game::renderPauseMenu() {
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0, this->width, 0, this->height);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+
+    GLboolean lightingWasOn = glIsEnabled(GL_LIGHTING);
+    if (lightingWasOn) {
+        glDisable(GL_LIGHTING);
+    }
+
+    GLboolean depthTestWasOn = glIsEnabled(GL_DEPTH_TEST);
+    if (depthTestWasOn) {
+        glDisable(GL_DEPTH_TEST);
+    }
+
+    GLboolean previousDepthMask;
+    glGetBooleanv(GL_DEPTH_WRITEMASK, &previousDepthMask);
+    glDepthMask(GL_FALSE);
+
+    GLboolean texture2DWasOn = glIsEnabled(GL_TEXTURE_2D);
+    if (texture2DWasOn) {
+        glDisable(GL_TEXTURE_2D);
+    }
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glColor4f(0.0f, 0.0f, 0.0f, 0.7f);
+
+    glBegin(GL_QUADS);
+        glVertex2f(0, 0);
+        glVertex2f(this->width, 0);
+        glVertex2f(this->width, this->height);
+        glVertex2f(0, this->height);
+    glEnd();
+
+    float centerX = this->width / 2.0f;
+    float centerY = this->height / 2.0f;
+
+    const char* pauseText = "PAUSA";
+    TTF_SetFontStyle(gameFont, TTF_STYLE_BOLD);
+    drawTextGame(pauseText, centerX - (strlen(pauseText) * 10), centerY + 70, textColor, true);
+
+    const char* resumeText = "Reanudar (R)";
+    TTF_SetFontStyle(gameFont, TTF_STYLE_NORMAL);
+    int resumeW, resumeH;
+    TTF_SizeUTF8(gameFont, resumeText, &resumeW, &resumeH);
+    resumeButtonRect = { (int)(centerX - resumeW / 2), (int)(centerY + 20), resumeW, resumeH + 5 };
+    drawTextGame(resumeText, resumeButtonRect.x, this->height - (resumeButtonRect.y + resumeButtonRect.h), textColor, false);
+
+    const char* mainMenuText = "Menu Principal (M)";
+    int menuW, menuH;
+    TTF_SizeUTF8(gameFont, mainMenuText, &menuW, &menuH);
+    mainMenuButtonRect = { (int)(centerX - menuW / 2), (int)(resumeButtonRect.y - menuH - 15), menuW, menuH + 5 };
+    drawTextGame(mainMenuText, mainMenuButtonRect.x, this->height - (mainMenuButtonRect.y + mainMenuButtonRect.h), textColor, false);
+
+    const char* exitText = "Salir del Juego (Q)";
+    int exitW, exitH;
+    TTF_SizeUTF8(gameFont, exitText, &exitW, &exitH);
+    exitButtonRect = { (int)(centerX - exitW / 2), (int)(mainMenuButtonRect.y - exitH - 15), exitW, exitH + 5 };
+    drawTextGame(exitText, exitButtonRect.x, this->height - (exitButtonRect.y + exitButtonRect.h), textColor, false);
+
+    glDisable(GL_BLEND);
+
+    if (texture2DWasOn) {
+        glEnable(GL_TEXTURE_2D);
+    }
+    glDepthMask(previousDepthMask);
+    if (depthTestWasOn) {
+        glEnable(GL_DEPTH_TEST);
+    }
+    if (lightingWasOn) {
     glEnable(GL_LIGHTING);
 }
 
-void Game::render(int width, int height) {
-    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+}
+
+void Game::render(int renderWidth, int renderHeight) {
+    glViewport(0, 0, renderWidth, renderHeight);
+    glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60.0, (float)width / (float)height, 1.0, 100.0);
+    gluPerspective(60.0, (float)renderWidth / (float)renderHeight, 1.0, 200.0);
 
-    // Modelview
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
-    // Actualizar la cámara (especialmente importante para modo de seguimiento)
-    camera->Update();
-
-    // Aplicar la cámara
     camera->Apply();
 
     if (this->rotate) {
-        this->degrees = degrees + 0.1f;
+        glRotatef(degrees, 0.0f, 1.0f, 0.0f);
     }
-    glRotatef(this->degrees, 0.0, 1.0, 0.0);
 
     setupLighting();
 
     drawAxis();
     
 	for (auto& gameObject : gameObjects) {
-		gameObject->draw();
+		if(gameObject) gameObject->draw();
+	}
+
+    if (gameState == PAUSED) {
+        renderPauseMenu();
 	}
 }
 
-Game::Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius, Camera* camera, Vector3 characterPosition)
+Game::Game(SDL_Window* existingWindow, SDL_GLContext existingContext, TTF_Font* font,
+           int gridSize, int winWidth, int winHeight, float camAngleX_param, float camAngleY_param, float radius_param, Camera* cam, Vector3 charPos)
     : score(0),
     step(0),
-    width(width),
-    height(height),
+    width(winWidth),
+    height(winHeight),
     rotate(false),
     degrees(0),
-    camAngleX(camAngleX),
-    camAngleY(camAngleY),
-    radius(radius),
+    camAngleX(camAngleX_param),
+    camAngleY(camAngleY_param),
+    radius(radius_param),
     lastMouseX(0),
     lastMouseY(0),
     isDragging(false),
-    camera(camera),
-    window(nullptr),
-    glctx(nullptr),
+    camera(cam),
+    window(existingWindow),
+    glctx(existingContext),
     grid(nullptr),
-    characterPosition(characterPosition),
+    characterPosition(charPos),
     worm(nullptr),
 	gameObjects(std::vector <GameObject*>()),
-	gameState(WAITING_FOR_INPUT)
+    gameState(WAITING_FOR_INPUT),
+    hudDisplayNumber(0),
+    gameFont(font),
+    textTextureCache(0)
 {
     grid = new CubeGrid(gridSize);
-    SDL_Init(SDL_INIT_VIDEO);
-
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-    window = SDL_CreateWindow(
-        "SDL2 + OpenGL 2.1 Cube",
-        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        width, height,
-        SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
-    );
-    glctx = SDL_GL_CreateContext(window);
-
     glEnable(GL_DEPTH_TEST);
-
     lastTimestamp = 0;
     currentTimestamp = SDL_GetPerformanceCounter();
+    gameSpeed = 0.001f;
+}
 
-    gameSpeed = 0.001;
+Game::~Game() {
+    clearTextCache();
+}
+
+void Game::setHUDNumber(int number) {
+    hudDisplayNumber = number;
+}
+
+int Game::getHUDNumber() const {
+    return hudDisplayNumber;
 }
 
 void Game::processKey(const SDL_Event& event) {
-    if (this->gameState == GameState::WAITING_FOR_INPUT) {
+    if (this->gameState == WAITING_FOR_INPUT || this->gameState == PROCESSING) {
         this->gameState = GameState::PROCESSING;
         Vector3 option;
         switch (event.key.keysym.sym) {
@@ -318,72 +499,205 @@ void Game::processKey(const SDL_Event& event) {
                 }
                 break;
         }
-        if (gameState != GameState::ANIMATING) {
+        if (gameState != GameState::ANIMATING && gameState != GameState::FALLING && gameState != GameState::YOU_LOSE && gameState != GameState::YOU_WIN) {
             this->gameState = GameState::WAITING_FOR_INPUT;
         }
-		//if (!this->isWormSupported()) {
-  //          this->gameState = GameState::FALLING;
-		//}
     }
 }
 
+GameLoopResult Game::loop() {
+    bool gameRunning = true;
+    SDL_Event event;
+    bool ctrlPressed = false;
+
+    lastTimestamp = SDL_GetPerformanceCounter();
+
+    while (gameRunning) {
+        currentTimestamp = SDL_GetPerformanceCounter();
+        float deltaTime = (float)((currentTimestamp - lastTimestamp) * 1000.0 / (double)SDL_GetPerformanceFrequency());
+        lastTimestamp = currentTimestamp;
+
+        while (SDL_PollEvent(&event)) {
+            camera->HandleEvent(event);
+
+            if (event.type == SDL_QUIT) {
+                clearTextCache();
+                return GameLoopResult::ExitApplication;
+            }
+
+            if (gameState == PAUSED) {
+                if (event.type == SDL_KEYDOWN) {
+                    if (event.key.keysym.sym == SDLK_ESCAPE || event.key.keysym.sym == SDLK_r) {
+                        gameState = WAITING_FOR_INPUT;
+                        clearTextCache();
+                    } else if (event.key.keysym.sym == SDLK_m) {
+                        clearTextCache();
+                        return GameLoopResult::GoToMainMenu;
+                    } else if (event.key.keysym.sym == SDLK_q) {
+                        clearTextCache();
+                        return GameLoopResult::ExitApplication;
+                    }
+                } else if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
+                    int mouseX = event.button.x;
+                    int mouseY = event.button.y;
+                    int oglMouseY = this->height - mouseY;
+
+                    if (mouseX >= resumeButtonRect.x && mouseX <= resumeButtonRect.x + resumeButtonRect.w &&
+                        oglMouseY >= (this->height - (resumeButtonRect.y + resumeButtonRect.h)) && oglMouseY <= (this->height - resumeButtonRect.y) ) {
+                        gameState = WAITING_FOR_INPUT;
+                        clearTextCache();
+                    } else if (mouseX >= mainMenuButtonRect.x && mouseX <= mainMenuButtonRect.x + mainMenuButtonRect.w &&
+                               oglMouseY >= (this->height - (mainMenuButtonRect.y + mainMenuButtonRect.h)) && oglMouseY <= (this->height - mainMenuButtonRect.y) ) {
+                        clearTextCache();
+                        return GameLoopResult::GoToMainMenu;
+                    } else if (mouseX >= exitButtonRect.x && mouseX <= exitButtonRect.x + exitButtonRect.w &&
+                               oglMouseY >= (this->height - (exitButtonRect.y + exitButtonRect.h)) && oglMouseY <= (this->height - exitButtonRect.y) ) {
+                        clearTextCache();
+                        return GameLoopResult::ExitApplication;
+                    }
+                }
+            } else {
+                if (event.type == SDL_KEYDOWN) {
+                    if (event.key.keysym.sym == SDLK_ESCAPE) {
+                        gameState = PAUSED;
+                    } else if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL) {
+                        ctrlPressed = true;
+                    } else {
+                        if (gameState == WAITING_FOR_INPUT) {
+                             processKey(event);
+                        }
+                    }
+                } else if (event.type == SDL_KEYUP) {
+                    if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL) {
+                        ctrlPressed = false;
+                        this->rotate = false;
+                    }
+                } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+                    if (ctrlPressed) { this->rotate = true; }
+                } else if (event.type == SDL_MOUSEBUTTONUP) {
+                    if (ctrlPressed) { this->rotate = false; }
+                } else if (event.type == SDL_WINDOWEVENT) {
+                    if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+                        this->width = event.window.data1;
+                        this->height = event.window.data2;
+                    }
+                }
+            }
+        }
+
+        if (gameState != PAUSED) {
+            if (gameState == FALLING) {
+                this->fallWorm();
+                if (this->isWormSupported()) {
+                    this->gameState = WAITING_FOR_INPUT;
+                } else if (this->worm && this->worm->tail && this->worm->tail->GetPosition().y < 0) {
+                    this->gameState = YOU_LOSE;
+                }
+            }
+            else if (gameState == ANIMATING) {
+                this->animateWorm(deltaTime * gameSpeed);
+                if (worm && !worm->isAnimating()) {
+                    if (!this->isWormSupported()) {
+                        this->gameState = GameState::FALLING;
+                    } else {
+                        this->gameState = GameState::WAITING_FOR_INPUT;
+                    }
+                }
+            }
+            if (gameState == YOU_LOSE || gameState == YOU_WIN) {
+                SDL_Delay(2000);
+                clearTextCache();
+                return GameLoopResult::GameEnded;
+            }
+        }
+        
+        render(this->width, this->height);
+        SDL_GL_SwapWindow(window);
+        SDL_Delay(16);
+    }
+
+    clearTextCache();
+    return GameLoopResult::GameEnded;
+}
+
+void Game::destroy() {
+    clearTextCache();
+    delete worm; 
+    worm = nullptr;
+    delete grid;
+    grid = nullptr;
+    for (auto& go : gameObjects) {
+        if (go) delete go;
+    }
+    gameObjects.clear();
+}
+
 bool Game::isWormSupported() {
-    //naive implementation
-    //por ahora chequeo todo cada vez, pero en mundo ideal en cada movimiento solo se deberían
-    //recalcular las posiciones que cambian, no todas
-    Vector3 headPosition = this->worm->head->GetPosition();
-    Vector3 headPositionDown = Vector3(headPosition.x, headPosition.y - 1, headPosition.z);
-    Vector3 tailPosition = this->worm->tail->GetPosition();
-    Vector3 tailPositionDown = Vector3(tailPosition.x, tailPosition.y - 1, tailPosition.z);
-    if (this->grid->at(headPositionDown)->canSupportWormWeight()) {
+    if (!worm || !grid) return false; 
+    Vector3 headPos = worm->head->GetPosition();
+    Vector3 headPosDown(headPos.x, headPos.y - 1, headPos.z);
+    CubeGridElement* elementBelowHead = grid->at(headPosDown);
+    if (elementBelowHead != nullptr && elementBelowHead->canSupportWormWeight()) {
         return true;
     }
-    if (this->grid->at(tailPositionDown)->canSupportWormWeight()) {
+
+    Vector3 tailPos = worm->tail->GetPosition();
+    Vector3 tailPosDown(tailPos.x, tailPos.y - 1, tailPos.z);
+    CubeGridElement* elementBelowTail = grid->at(tailPosDown);
+    if (elementBelowTail != nullptr && elementBelowTail->canSupportWormWeight()) {
         return true;
     }
-    for (auto& part : this->worm->body) {
-        Vector3 bodyPosition = part->GetPosition();
-        Vector3 bodyPositionDown = Vector3(bodyPosition.x, bodyPosition.y - 1, bodyPosition.z);
-        if (this->grid->at(bodyPositionDown)->canSupportWormWeight()) {
+    
+    for (const auto& part : worm->body) {
+        if(!part) continue;
+        Vector3 bodyPos = part->GetPosition();
+        Vector3 bodyPosDown(bodyPos.x, bodyPos.y - 1, bodyPos.z);
+        CubeGridElement* elementBelowBody = grid->at(bodyPosDown);
+        if (elementBelowBody != nullptr && elementBelowBody->canSupportWormWeight()) {
             return true;
         }
     }
     return false;
-};
+}
 
 void Game::updateWormFallInCubeGrid() {
-	for (auto& part : this->worm->getParts()) {
+    if (!worm || !grid) return;
+	for (auto& part : worm->getParts()) {
+        if(!part) continue;
 		Vector3 pos = part->GetPosition();
-		Vector3 newPos = Vector3(pos.x, pos.y - 1, pos.z);
-		this->grid->setObject(pos, nullptr);
-        this->grid->setObject(newPos, part);
+        grid->setObject(pos, nullptr);
+		Vector3 newPos(pos.x, pos.y - 1, pos.z);
+        grid->setObject(newPos, part);
 	}
+}
+
+void Game::fallWorm() {
+    if (!worm || !grid) return;
+    updateWormFallInCubeGrid();
+    worm->fall(); 
+    Vector3 tailPos = worm->tail->GetPosition();
+    if (tailPos.y < 0) {
+        gameState = YOU_LOSE;
+    }
+}
+
+bool Game::canWormMoveForward(Vector3 orientation) {
+    if (!worm || !grid) return false;
+    Vector3 nextPos = worm->calculateWormPotentialNextPosition(orientation);
+    CubeGridElement* slot = grid->at(nextPos);
+    return slot != nullptr && !slot->isBlocked();
+}
+
+bool Game::willWormEatApple(Vector3 orientation) {
+    if (!worm || !grid) return false;
+    Vector3 nextPos = worm->calculateWormPotentialNextPosition(orientation);
+    CubeGridElement* slot = grid->at(nextPos);
+    return slot != nullptr && slot->hasApple();
 }
 
 void Game::updateWormReferences() {
     this->removeWormFromGameObjectsAndCubeGrid();
     this->addWormToGameObjectsAndCubeGrid();
-}
-
-void Game::fallWorm() {
-    if (!this->isWormSupported()) {
-        this->updateWormFallInCubeGrid();
-        this->worm->fall(); 
-        if (this->worm->tail->GetPosition().y < 5) {
-            this->gameState = GameState::YOU_LOSE;
-        }
-    }
-}
-
-bool Game::canWormMoveForward(Vector3 orientation) {
-    Vector3 nextPos = this->worm->calculateWormPotentialNextPosition(orientation);
-    CubeGridElement* slot = this->grid->at(nextPos);
-    return !slot->isBlocked();
-}
-
-bool Game::willWormEatApple(Vector3 orientation) {
-    Vector3 nextPos = this->worm->calculateWormPotentialNextPosition(orientation);
-    return this->grid->at(nextPos)->hasApple();
 }
 
 void Game::removeGameObjectFromGameObjectsAndCubeGrid(GameObject* go, bool isWorm) {
@@ -394,7 +708,7 @@ void Game::removeGameObjectFromGameObjectsAndCubeGrid(GameObject* go, bool isWor
     }
     Vector3 pos = go->GetPosition();
     this->grid->setObject(pos, nullptr);
-    if (!isWorm) { delete go; };
+    if (!isWorm) delete go;
 }
 
 void Game::eatApple() {
@@ -430,168 +744,4 @@ void Game::addWormToGameObjectsAndCubeGrid() {
 
 void Game::animateWorm(float deltaTime) {
     this->worm->updateAnimation(deltaTime);
-}
-
-/*void Game::loop() {
-    lastTimestamp = currentTimestamp;
-    currentTimestamp = SDL_GetPerformanceCounter();
-    float deltaTime = (float)((currentTimestamp - lastTimestamp) / (double)SDL_GetPerformanceFrequency());
-    bool running = true;
-    SDL_Event event;
-    while (running) {
-        while (SDL_PollEvent(&event)) {
-            switch (event.type) {
-            case SDL_QUIT:
-                running = false;
-                break;
-            case SDL_WINDOWEVENT:
-                if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-                    width = event.window.data1;
-                    height = event.window.data2;
-                }
-                break;
-            case SDL_MOUSEBUTTONDOWN:
-                if (event.button.button == SDL_BUTTON_LEFT) {
-                    isDragging = true;
-                    lastMouseX = event.button.x;
-                    lastMouseY = event.button.y;
-                }
-                break;
-            case SDL_MOUSEBUTTONUP:
-                if (event.button.button == SDL_BUTTON_LEFT) {
-                    isDragging = false;
-                }
-                break;
-            case SDL_MOUSEMOTION:
-                if (isDragging) {
-                    int dx = event.motion.x - lastMouseX;
-                    int dy = event.motion.y - lastMouseY;
-                    camAngleY += dx;
-                    camAngleX += dy;
-                    if (camAngleX > 89) camAngleX = 89;
-                    if (camAngleX < -89) camAngleX = -89;
-                    lastMouseX = event.motion.x;
-                    lastMouseY = event.motion.y;
-                }
-                break;
-            case SDL_MOUSEWHEEL:
-                // Zoom in/out
-                radius -= event.wheel.y * 0.5f; // y > 0 is scroll up
-                if (radius < 2.0f) radius = 2.0f;
-                if (radius > 20.0f) radius = 20.0f;
-                break;
-            case SDL_KEYUP:
-                this->processKey(event);
-                break;
-			}
-		}
-		if (this->gameState == GameState::FALLING) {
-			this->fallWorm();
-			if (this->isWormSupported()) {
-				this->gameState = GameState::WAITING_FOR_INPUT;
-			}
-        }
-        else if (this->gameState == GameState::ANIMATING) {
-            this->worm->updateAnimation(deltaTime * gameSpeed);
-            if(!worm->isAnimating()){
-                if (!this->isWormSupported()) {
-                    this->gameState = GameState::FALLING;
-                }
-                else {
-                    this->gameState = GameState::WAITING_FOR_INPUT;
-                }
-            }
-        }
-        for (auto& go : gameObjects) {
-            if (go!= NULL && dynamic_cast<WormPart*>(go) == NULL) {
-                go->update(deltaTime * gameSpeed);
-            }
-            //gameObjects.push_back(part);
-        }
-        render(width, height);
-        SDL_GL_SwapWindow(window);
-        //SDL_Delay(16); // ~60 FPS
-    }
-}*/
-
-
-void Game::loop() {
-    bool running = true;
-    SDL_Event event;
-    bool ctrlPressed = false;
-
-    lastTimestamp = currentTimestamp;
-    currentTimestamp = SDL_GetPerformanceCounter();
-    float deltaTime = (float)((currentTimestamp - lastTimestamp) / (double)SDL_GetPerformanceFrequency());
-
-    while (running) {
-        while (SDL_PollEvent(&event)) {
-            // Procesar eventos para la cámara
-            camera->HandleEvent(event);
-
-            switch (event.type) {
-            case SDL_MOUSEBUTTONDOWN:
-                // Solo activar rotación si CTRL está presionado
-                if (ctrlPressed) {
-                    this->rotate = true;
-                    std::cout << "ROT\n";
-                }
-                break;
-            case SDL_MOUSEBUTTONUP:
-                if (ctrlPressed) {
-                    this->rotate = false;
-                }
-                break;
-            case SDL_QUIT:
-                running = false;
-                break;
-            case SDL_WINDOWEVENT:
-                if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-                    width = event.window.data1;
-                    height = event.window.data2;
-                }
-                break;
-            case SDL_KEYDOWN:
-                // Comprobar CTRL
-                if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL) {
-                    ctrlPressed = true;
-                }
-                // Mover al personaje con teclas de flecha
-                else if (event.key.keysym.sym == SDLK_UP) {
-                    characterPosition.z -= 0.1f;
-                }
-                else if (event.key.keysym.sym == SDLK_DOWN) {
-                    characterPosition.z += 0.1f;
-                }
-                else if (event.key.keysym.sym == SDLK_LEFT) {
-                    characterPosition.x -= 0.1f;
-                }
-                else if (event.key.keysym.sym == SDLK_RIGHT) {
-                    characterPosition.x += 0.1f;
-                }
-                break;
-            case SDL_KEYUP:
-                this->processKey(event);
-                if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL) {
-                    ctrlPressed = false;
-                    // Si soltamos CTRL, también dejamos de rotar
-                    this->rotate = false;
-                }
-                else if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    running = false;
-                }
-                break;
-            }
-        }
-
-        render(width, height);
-        SDL_GL_SwapWindow(window);
-        SDL_Delay(16); // ~60 FPS
-    }
-}
-
-void Game::destroy() {
-    SDL_GL_DeleteContext(glctx);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 }
