@@ -23,6 +23,8 @@
 #include "Utils.h"
 
 SDL_Rect resumeButtonRect;
+SDL_Rect wireframeButtonRect;
+SDL_Rect texturesButtonRect;
 SDL_Rect mainMenuButtonRect;
 SDL_Rect exitButtonRect;
 
@@ -319,10 +321,23 @@ void Game::renderPauseMenu() {
     resumeButtonRect = { (int)(centerX - resumeW / 2), (int)(centerY + 20), resumeW, resumeH + 5 };
     drawTextGame(resumeText, resumeButtonRect.x, this->height - (resumeButtonRect.y + resumeButtonRect.h), textColor, false);
 
+    //Later on ill probably move it to a settings window
+    const char* wireframeText = "Alternar Wireframe (Y)"; //La W esta ocupada =(
+    int wireW, wireH;
+    TTF_SizeUTF8(gameFont, wireframeText, &wireW, &wireH);
+    wireframeButtonRect = { (int)(centerX - wireW / 2), (int)(resumeButtonRect.y - wireH - 15), wireW, wireH + 5 };
+    drawTextGame(wireframeText, wireframeButtonRect.x, this->height - (wireframeButtonRect.y + wireframeButtonRect.h), textColor, false);
+
+    const char* textureText = "Alternar Texturas (T)"; //La W esta ocupada =(
+    int texW, texH;
+    TTF_SizeUTF8(gameFont, textureText, &texW, &texH);
+    texturesButtonRect = { (int)(centerX - texW / 2), (int)(wireframeButtonRect.y - texH - 15), texW, texH + 5 };
+    drawTextGame(textureText, texturesButtonRect.x, this->height - (texturesButtonRect.y + texturesButtonRect.h), textColor, false);
+
     const char* mainMenuText = "Menu Principal (M)";
     int menuW, menuH;
     TTF_SizeUTF8(gameFont, mainMenuText, &menuW, &menuH);
-    mainMenuButtonRect = { (int)(centerX - menuW / 2), (int)(resumeButtonRect.y - menuH - 15), menuW, menuH + 5 };
+    mainMenuButtonRect = { (int)(centerX - menuW / 2), (int)(texturesButtonRect.y - menuH - 15), menuW, menuH + 5 };
     drawTextGame(mainMenuText, mainMenuButtonRect.x, this->height - (mainMenuButtonRect.y + mainMenuButtonRect.h), textColor, false);
 
     const char* exitText = "Salir del Juego (Q)";
@@ -370,11 +385,23 @@ void Game::render(int renderWidth, int renderHeight) {
     setupLighting();
 
     drawAxis();
-    
-	for (auto& gameObject : gameObjects) {
-		if(gameObject) gameObject->draw();
-	}
-
+    if (wireframe) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    } else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+    if (textured) {
+        glEnable(GL_TEXTURE_2D);
+    } else {
+        glDisable(GL_TEXTURE_2D);
+    }
+    for (auto& gameObject : gameObjects) {
+        gameObject->draw();
+    }
+    glDisable(GL_TEXTURE_2D);
+    if (wireframe) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
     if (gameState == PAUSED) {
         renderPauseMenu();
 	}
@@ -406,11 +433,13 @@ Game::Game(SDL_Window* existingWindow, SDL_GLContext existingContext, TTF_Font* 
     gameFont(font),
     textTextureCache(0)
 {
+    textured = true;
+    wireframe = false;
     grid = new CubeGrid(gridSize);
     glEnable(GL_DEPTH_TEST);
     lastTimestamp = 0;
     currentTimestamp = SDL_GetPerformanceCounter();
-    gameSpeed = 0.001f;
+    gameSpeed = 1;
 }
 
 Game::~Game() {
@@ -514,7 +543,7 @@ GameLoopResult Game::loop() {
 
     while (gameRunning) {
         currentTimestamp = SDL_GetPerformanceCounter();
-        float deltaTime = (float)((currentTimestamp - lastTimestamp) * 1000.0 / (double)SDL_GetPerformanceFrequency());
+        float deltaTime = (float)((currentTimestamp - lastTimestamp) / (double)SDL_GetPerformanceFrequency());
         lastTimestamp = currentTimestamp;
 
         while (SDL_PollEvent(&event)) {
@@ -536,14 +565,18 @@ GameLoopResult Game::loop() {
                     } else if (event.key.keysym.sym == SDLK_q) {
                         clearTextCache();
                         return GameLoopResult::ExitApplication;
+                    } else if (event.key.keysym.sym == SDLK_t) {
+                        toggleTextures();
+                    } else if (event.key.keysym.sym == SDLK_y) {
+                        toggleWireframe();
                     }
                 } else if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
                     int mouseX = event.button.x;
                     int mouseY = event.button.y;
-                    int oglMouseY = this->height - mouseY;
+                    int oglMouseY = mouseY;
 
                     if (mouseX >= resumeButtonRect.x && mouseX <= resumeButtonRect.x + resumeButtonRect.w &&
-                        oglMouseY >= (this->height - (resumeButtonRect.y + resumeButtonRect.h)) && oglMouseY <= (this->height - resumeButtonRect.y) ) {
+                        oglMouseY >= this->height - (resumeButtonRect.y + resumeButtonRect.h) && oglMouseY <= this->height - resumeButtonRect.y ) {
                         gameState = WAITING_FOR_INPUT;
                         clearTextCache();
                     } else if (mouseX >= mainMenuButtonRect.x && mouseX <= mainMenuButtonRect.x + mainMenuButtonRect.w &&
@@ -554,6 +587,12 @@ GameLoopResult Game::loop() {
                                oglMouseY >= (this->height - (exitButtonRect.y + exitButtonRect.h)) && oglMouseY <= (this->height - exitButtonRect.y) ) {
                         clearTextCache();
                         return GameLoopResult::ExitApplication;
+                    } else if (mouseX >= texturesButtonRect.x && mouseX <= texturesButtonRect.x + texturesButtonRect.w &&
+                        oglMouseY >= (this->height - (texturesButtonRect.y + texturesButtonRect.h)) && oglMouseY <= (this->height - texturesButtonRect.y)) {
+                        toggleTextures();
+                    } else if (mouseX >= wireframeButtonRect.x && mouseX <= wireframeButtonRect.x + wireframeButtonRect.w &&
+                        oglMouseY >= (this->height - (wireframeButtonRect.y + wireframeButtonRect.h)) && oglMouseY <= (this->height - wireframeButtonRect.y)) {
+                        toggleWireframe();
                     }
                 }
             } else {
@@ -733,6 +772,25 @@ void Game::removeWormFromGameObjectsAndCubeGrid() {
 	for (auto& part : wormParts) {
 		this->removeGameObjectFromGameObjectsAndCubeGrid(part, true);
 	}
+}
+
+void Game::toggleWireframe() {
+    wireframe = !wireframe;
+    
+    /*
+    GLint* polygonMode = new int[2];
+    glGetIntegerv(GL_POLYGON_MODE, polygonMode);
+    if (polygonMode[0] == GL_LINE || polygonMode[1] == GL_LINE) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+    else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+    delete[] polygonMode;*/
+}
+
+void Game::toggleTextures() {
+    textured = !textured;
 }
 
 void Game::addWormToGameObjectsAndCubeGrid() {
