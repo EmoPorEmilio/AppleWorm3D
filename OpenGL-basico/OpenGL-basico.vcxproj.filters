@@ -18,6 +18,7 @@
     <ClCompile Include="..\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -76,10 +77,14 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Lava.cpp">
+=======
+    <ClCompile Include="..\Camera.cpp">
+>>>>>>> master
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -141,6 +146,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Lava.h">
+=======
+    <ClInclude Include="..\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ICameraStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FreeCameraStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FollowCameraStrategy.h">
+>>>>>>> master
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
