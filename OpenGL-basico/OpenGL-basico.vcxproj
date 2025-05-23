@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -133,6 +134,17 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="tinyxml\tinystr.h" />
     <ClInclude Include="tinyxml\tinyxml.h" />
+=======
+    <ClCompile Include="..\Camera.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Camera.h" />
+    <ClInclude Include="..\Vector3.h" />
+    <ClInclude Include="..\ICameraStrategy.h" />
+    <ClInclude Include="..\FreeCameraStrategy.h" />
+    <ClInclude Include="..\FollowCameraStrategy.h" />
+    <ClInclude Include="..\SideCameraStrategy.h" />
+>>>>>>> master
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

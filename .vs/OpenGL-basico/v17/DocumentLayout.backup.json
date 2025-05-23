@@ -1,5 +1,6 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "C:\\Users\\emili\\OneDrive\\Escritorio\\proyectos\\AppleWorm3D\\",
   "Documents": [
     {
@@ -15,6 +16,10 @@
       "RelativeMoniker": "D:0:0:{253970C5-4794-4D0E-AC65-24BFFE03C8A7}|OpenGL-basico\\OpenGL-basico.vcxproj|solutionrelative:OpenGL-basico\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
+=======
+  "WorkspaceRootPath": "C:\\Users\\emili\\Downloads\\OpenGL-basico\\OpenGL-basico\\",
+  "Documents": [],
+>>>>>>> master
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -22,11 +27,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 1,
+=======
+          "SelectedChildIndex": -1,
+>>>>>>> master
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+<<<<<<< HEAD
             },
             {
               "$type": "Document",
@@ -66,6 +76,8 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-11T19:04:27.093Z",
               "EditorCaption": ""
+=======
+>>>>>>> master
             }
           ]
         }
