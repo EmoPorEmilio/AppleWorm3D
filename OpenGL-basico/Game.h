@@ -59,6 +59,8 @@ private:
     SDL_Color textColor = { 255, 255, 255, 255 };
     GLuint textTextureCache;
     int textWidthCache, textHeightCache;
+    bool textured;
+    bool wireframe;
 
     void renderHUD();
     void renderPauseMenu();
@@ -94,4 +96,6 @@ public:
 
     void setHUDNumber(int number);
     int getHUDNumber() const;
+    void toggleWireframe();
+    void toggleTextures();
 };
