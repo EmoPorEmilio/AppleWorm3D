@@ -225,7 +225,7 @@ void drawCube(float x, float y, float z, float size, Colors color) {
 }
 
 void DrawOBJ(const ObjModel& model, GLuint textureID) {
-    glEnable(GL_TEXTURE_2D);
+    //glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, textureID);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -256,5 +256,5 @@ void DrawOBJ(const ObjModel& model, GLuint textureID) {
     }
     glEnd();
 
-    glDisable(GL_TEXTURE_2D);
+    //glDisable(GL_TEXTURE_2D);
 }

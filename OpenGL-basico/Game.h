@@ -1,4 +1,9 @@
 #pragma once
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <SDL.h>
+#include <SDL_ttf.h>
 #include "CubeGrid.h"
 #include "Colors.h"
 #include "Camera.h"
@@ -12,7 +17,15 @@ enum GameState {
     FALLING,
     YOU_WIN,
     YOU_LOSE,
-    ANIMATING //
+    ANIMATING,
+    PAUSED
+};
+
+enum class GameLoopResult {
+    ContinueLoop,
+    GameEnded,
+    GoToMainMenu,
+    ExitApplication
 };
 
 class Game {
@@ -40,11 +53,29 @@ private:
     Uint64 currentTimestamp;
     Uint64 lastTimestamp;
     float gameSpeed;
+
+    int hudDisplayNumber;
+    TTF_Font* gameFont;
+    SDL_Color textColor = { 255, 255, 255, 255 };
+    GLuint textTextureCache;
+    int textWidthCache, textHeightCache;
+    bool textured;
+    bool wireframe;
+
+    void renderHUD();
+    void renderPauseMenu();
+    void drawTextGame(const char* text, float x, float y, SDL_Color color, bool useCache = false);
+    void clearTextCache();
+
 public:
-    Game(int gridSize, int width, int height, float camAngleX, float camAngleY, float radius, Camera* camera, Vector3 characterPosition);
-    void loop();
+    Game(SDL_Window* existingWindow, SDL_GLContext existingContext, TTF_Font* font, 
+         int gridSize, int winWidth, int winHeight, float camAngleX, float camAngleY, float radius, Camera* camera, Vector3 characterPosition);
+    ~Game();
+    
+    GameLoopResult loop();
     void destroy();
-    void render(int width, int height);
+    
+    void render(int renderWidth, int renderHeight);
     void setupLighting();
     void drawAxis();
 	void loadGameObjectsFromXML(const char* filename);
@@ -62,4 +93,9 @@ public:
     bool isWormSupported();
     void animateWorm(float deltaTime);
     void updateWormReferences();
+
+    void setHUDNumber(int number);
+    int getHUDNumber() const;
+    void toggleWireframe();
+    void toggleTextures();
 };
