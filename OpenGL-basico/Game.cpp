@@ -25,6 +25,7 @@
 SDL_Rect resumeButtonRect;
 SDL_Rect wireframeButtonRect;
 SDL_Rect texturesButtonRect;
+SDL_Rect gameSpeedButtonRect;
 SDL_Rect mainMenuButtonRect;
 SDL_Rect exitButtonRect;
 
@@ -310,9 +311,9 @@ void Game::renderPauseMenu() {
     float centerX = this->width / 2.0f;
     float centerY = this->height / 2.0f;
 
-    const char* pauseText = "PAUSA";
+    /*const char* pauseText = "PAUSA";
     TTF_SetFontStyle(gameFont, TTF_STYLE_BOLD);
-    drawTextGame(pauseText, centerX - (strlen(pauseText) * 10), centerY + 70, textColor, true);
+    drawTextGame(pauseText, centerX - (strlen(pauseText) * 10), centerY + 70, textColor, true);*/
 
     const char* resumeText = "Reanudar (R)";
     TTF_SetFontStyle(gameFont, TTF_STYLE_NORMAL);
@@ -321,23 +322,34 @@ void Game::renderPauseMenu() {
     resumeButtonRect = { (int)(centerX - resumeW / 2), (int)(centerY + 20), resumeW, resumeH + 5 };
     drawTextGame(resumeText, resumeButtonRect.x, this->height - (resumeButtonRect.y + resumeButtonRect.h), textColor, false);
 
-    //Later on ill probably move it to a settings window
     const char* wireframeText = "Alternar Wireframe (Y)"; //La W esta ocupada =(
     int wireW, wireH;
     TTF_SizeUTF8(gameFont, wireframeText, &wireW, &wireH);
     wireframeButtonRect = { (int)(centerX - wireW / 2), (int)(resumeButtonRect.y - wireH - 15), wireW, wireH + 5 };
     drawTextGame(wireframeText, wireframeButtonRect.x, this->height - (wireframeButtonRect.y + wireframeButtonRect.h), textColor, false);
 
-    const char* textureText = "Alternar Texturas (T)"; //La W esta ocupada =(
+    const char* textureText = "Alternar Texturas (T)";
     int texW, texH;
     TTF_SizeUTF8(gameFont, textureText, &texW, &texH);
     texturesButtonRect = { (int)(centerX - texW / 2), (int)(wireframeButtonRect.y - texH - 15), texW, texH + 5 };
     drawTextGame(textureText, texturesButtonRect.x, this->height - (texturesButtonRect.y + texturesButtonRect.h), textColor, false);
 
+    //std::string extraDashes = std::string("-",3) + "[]" + std::string("-",7);
+    
+    std::string gameSpeedText = "Velocidad del juego (<-, ->) ";
+    gameSpeedText.append("x");
+    char array[5];
+    sprintf_s(array, "%.2f", gameSpeed);
+    gameSpeedText.append(array);
+    int speedW, speedH;
+    TTF_SizeUTF8(gameFont, gameSpeedText.c_str(), &speedW, &speedH);
+    gameSpeedButtonRect = { (int)(centerX - speedW / 2), (int)(texturesButtonRect.y - speedH - 15), speedW, speedH + 5 };
+    drawTextGame(gameSpeedText.c_str(), gameSpeedButtonRect.x, this->height - (gameSpeedButtonRect.y + gameSpeedButtonRect.h), textColor, false);
+
     const char* mainMenuText = "Menu Principal (M)";
     int menuW, menuH;
     TTF_SizeUTF8(gameFont, mainMenuText, &menuW, &menuH);
-    mainMenuButtonRect = { (int)(centerX - menuW / 2), (int)(texturesButtonRect.y - menuH - 15), menuW, menuH + 5 };
+    mainMenuButtonRect = { (int)(centerX - menuW / 2), (int)(gameSpeedButtonRect.y - menuH - 15), menuW, menuH + 5 };
     drawTextGame(mainMenuText, mainMenuButtonRect.x, this->height - (mainMenuButtonRect.y + mainMenuButtonRect.h), textColor, false);
 
     const char* exitText = "Salir del Juego (Q)";
@@ -569,6 +581,16 @@ GameLoopResult Game::loop() {
                         toggleTextures();
                     } else if (event.key.keysym.sym == SDLK_y) {
                         toggleWireframe();
+                    } else if (event.key.keysym.sym == SDLK_RIGHT) {
+                        gameSpeed = gameSpeed + 0.25f;
+                        if (gameSpeed > 2) {
+                            gameSpeed = 2;
+                        }
+                    } else if (event.key.keysym.sym == SDLK_LEFT) {
+                        gameSpeed = gameSpeed - 0.25f;
+                        if (gameSpeed < 0.25f) {
+                            gameSpeed = 0.25f;
+                        }
                     }
                 } else if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
                     int mouseX = event.button.x;
