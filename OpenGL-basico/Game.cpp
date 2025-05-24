@@ -592,21 +592,22 @@ GameLoopResult Game::loop() {
                             gameSpeed = 0.25f;
                         }
                     }
-                } else if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
+                }
+                else if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
                     int mouseX = event.button.x;
                     int mouseY = event.button.y;
                     int oglMouseY = mouseY;
 
                     if (mouseX >= resumeButtonRect.x && mouseX <= resumeButtonRect.x + resumeButtonRect.w &&
-                        oglMouseY >= this->height - (resumeButtonRect.y + resumeButtonRect.h) && oglMouseY <= this->height - resumeButtonRect.y ) {
+                        oglMouseY >= this->height - (resumeButtonRect.y + resumeButtonRect.h) && oglMouseY <= this->height - resumeButtonRect.y) {
                         gameState = WAITING_FOR_INPUT;
                         clearTextCache();
                     } else if (mouseX >= mainMenuButtonRect.x && mouseX <= mainMenuButtonRect.x + mainMenuButtonRect.w &&
-                               oglMouseY >= (this->height - (mainMenuButtonRect.y + mainMenuButtonRect.h)) && oglMouseY <= (this->height - mainMenuButtonRect.y) ) {
+                        oglMouseY >= (this->height - (mainMenuButtonRect.y + mainMenuButtonRect.h)) && oglMouseY <= (this->height - mainMenuButtonRect.y)) {
                         clearTextCache();
                         return GameLoopResult::GoToMainMenu;
                     } else if (mouseX >= exitButtonRect.x && mouseX <= exitButtonRect.x + exitButtonRect.w &&
-                               oglMouseY >= (this->height - (exitButtonRect.y + exitButtonRect.h)) && oglMouseY <= (this->height - exitButtonRect.y) ) {
+                        oglMouseY >= (this->height - (exitButtonRect.y + exitButtonRect.h)) && oglMouseY <= (this->height - exitButtonRect.y)) {
                         clearTextCache();
                         return GameLoopResult::ExitApplication;
                     } else if (mouseX >= texturesButtonRect.x && mouseX <= texturesButtonRect.x + texturesButtonRect.w &&
@@ -615,6 +616,12 @@ GameLoopResult Game::loop() {
                     } else if (mouseX >= wireframeButtonRect.x && mouseX <= wireframeButtonRect.x + wireframeButtonRect.w &&
                         oglMouseY >= (this->height - (wireframeButtonRect.y + wireframeButtonRect.h)) && oglMouseY <= (this->height - wireframeButtonRect.y)) {
                         toggleWireframe();
+                    } else if (mouseX >= gameSpeedButtonRect.x && mouseX <= gameSpeedButtonRect.x + gameSpeedButtonRect.w &&
+                        oglMouseY >= (this->height - (gameSpeedButtonRect.y + gameSpeedButtonRect.h)) && oglMouseY <= (this->height - gameSpeedButtonRect.y)) {
+                        gameSpeed = gameSpeed + 0.25f;
+                        if (gameSpeed > 2) {
+                            gameSpeed = 0.25f;
+                        }
                     }
                 }
             } else {
