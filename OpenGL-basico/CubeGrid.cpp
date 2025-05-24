@@ -27,10 +27,22 @@ CubeGrid::CubeGrid(int initialSize) : gridSize(initialSize) {
 }
 
 GameObject* CubeGrid::getObject(Vector3 position) {
+    if (position.x < 0 || position.y < 0 || position.z < 0) {
+        return nullptr;
+    }
+    if (position.x >= gridSize || position.y >= gridSize || position.z >= gridSize) {
+        return nullptr;
+    }
 	return grid[position.x][position.y][position.z]->getObject();
 }
 
 void CubeGrid::setObject(Vector3 position, GameObject* object) {
+    if (position.x < 0 || position.y < 0 || position.z < 0) {
+        return;
+    }
+    if (position.x >= gridSize || position.y >= gridSize || position.z >= gridSize) {
+        return;
+    }
 	grid[(int)position.x][(int)position.y][(int)position.z]->setObject(object);
 }
 
@@ -45,6 +57,12 @@ CubeGrid::~CubeGrid() {
 }
 
 CubeGridElement* CubeGrid::at(Vector3 position) {
+    if (position.x < 0 || position.y < 0 || position.z < 0) {
+        return nullptr;
+    }
+    if (position.x >= gridSize || position.y >= gridSize || position.z >= gridSize) {
+        return nullptr;
+    }
     return grid[(int)position.x][(int)position.y][(int)position.z];
 }
 

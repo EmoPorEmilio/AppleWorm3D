@@ -311,10 +311,10 @@ void Game::renderPauseMenu() {
     float centerX = this->width / 2.0f;
     float centerY = this->height / 2.0f;
 
-    /*const char* pauseText = "PAUSA";
+    const char* pauseText = "PAUSA";
     TTF_SetFontStyle(gameFont, TTF_STYLE_BOLD);
-    drawTextGame(pauseText, centerX - (strlen(pauseText) * 10), centerY + 70, textColor, true);*/
-
+    drawTextGame(pauseText, centerX - (strlen(pauseText) * 10), centerY - 210, textColor, false);
+    
     const char* resumeText = "Reanudar (R)";
     TTF_SetFontStyle(gameFont, TTF_STYLE_NORMAL);
     int resumeW, resumeH;
