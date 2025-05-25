@@ -105,13 +105,16 @@ bool Worm::isAnimating() {
 void Worm::fall() {
     Vector3 head = this->head->GetPosition();
     Vector3 tail = this->tail->GetPosition();
-    this->head->SetPosition(Vector3(head.x, head.y - 1, head.z));
-    this->tail->SetPosition(Vector3(tail.x, tail.y - 1, tail.z));
+    this->head->animatorMove(Vector3(head.x, head.y - 1, head.z));
+    //this->head->SetPosition(Vector3(head.x, head.y - 1, head.z));
+    //this->tail->SetPosition(Vector3(tail.x, tail.y - 1, tail.z));
    
     for (auto& part : body) {
         Vector3 temp = part->GetPosition();
-        part->SetPosition(Vector3(temp.x, temp.y - 1, temp.z));
+        part->animatorMove(Vector3(temp.x, temp.y - 1, temp.z));
+        //part->SetPosition(Vector3(temp.x, temp.y - 1, temp.z));
     }
+    this->tail->animatorMove(Vector3(tail.x, tail.y - 1, tail.z));
 }
 
 Vector3 Worm::getNextPosition() {

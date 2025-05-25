@@ -656,10 +656,13 @@ GameLoopResult Game::loop() {
         if (gameState != PAUSED) {
             if (gameState == FALLING) {
                 this->fallWorm();
-                if (this->isWormSupported()) {
-                    this->gameState = WAITING_FOR_INPUT;
-                } else if (this->worm && this->worm->tail && this->worm->tail->GetPosition().y < 0) {
+                /*if (this->isWormSupported()) {
+                    this->gameState = WAITING_FOR_INPUT;*/
+                /*} else */if (this->worm && this->worm->tail && this->worm->tail->GetPosition().y < 0) {
                     this->gameState = YOU_LOSE;
+                }
+                else {
+                    this->gameState = ANIMATING;
                 }
             }
             else if (gameState == ANIMATING) {
