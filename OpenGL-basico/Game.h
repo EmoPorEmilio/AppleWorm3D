@@ -50,6 +50,7 @@ private:
     CubeGrid* grid;
     Vector3 characterPosition;
 	GameState gameState;
+    GameState previousState;
     Uint64 currentTimestamp;
     Uint64 lastTimestamp;
     float gameSpeed;

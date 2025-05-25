@@ -569,7 +569,7 @@ GameLoopResult Game::loop() {
             if (gameState == PAUSED) {
                 if (event.type == SDL_KEYDOWN) {
                     if (event.key.keysym.sym == SDLK_ESCAPE || event.key.keysym.sym == SDLK_r) {
-                        gameState = WAITING_FOR_INPUT;
+                        gameState = previousState;
                         clearTextCache();
                     } else if (event.key.keysym.sym == SDLK_m) {
                         clearTextCache();
@@ -627,6 +627,7 @@ GameLoopResult Game::loop() {
             } else {
                 if (event.type == SDL_KEYDOWN) {
                     if (event.key.keysym.sym == SDLK_ESCAPE) {
+                        previousState = gameState;
                         gameState = PAUSED;
                     } else if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL) {
                         ctrlPressed = true;
@@ -686,7 +687,7 @@ GameLoopResult Game::loop() {
         SDL_GL_SwapWindow(window);
         SDL_Delay(16);
     }
-
+    
     clearTextCache();
     return GameLoopResult::GameEnded;
 }
