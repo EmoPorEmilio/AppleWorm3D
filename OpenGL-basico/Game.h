@@ -61,6 +61,7 @@ private:
     GLuint textTextureCache;
     int textWidthCache, textHeightCache;
     bool wireframe;
+    int lightingSetup;
 
     void renderHUD();
     void renderPauseMenu();
@@ -99,4 +100,5 @@ public:
     void toggleWireframe();
     void toggleTextures();
     void toggleShading();
+    void toggleLightingSetup();
 };
