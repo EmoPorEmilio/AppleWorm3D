@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+<<<<<<< HEAD
+        "vector": "cpp"
+=======
+        "xutility": "cpp"
+>>>>>>> master
+    }
+}

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Apple.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Colors.cpp" />
+    <ClCompile Include="CubeGrid.cpp" />
+    <ClCompile Include="CubeGridElement.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Lava.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuScreen.cpp" />
+    <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="Portal.h" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="LevelSelectionScreen.cpp" />
+    <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="tinyxml\tinystr.cpp" />
+    <ClCompile Include="tinyxml\tinyxml.cpp" />
+    <ClCompile Include="tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Worm.cpp" />
+    <ClCompile Include="WormPart.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SDL2_ttf-2.0.12\include\SDL_ttf.h" />
+    <ClInclude Include="Animator.h" />
+    <ClInclude Include="Apple.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Colors.h" />
+    <ClInclude Include="CubeGrid.h" />
+    <ClInclude Include="CubeGridElement.h" />
+    <ClInclude Include="FollowCameraStrategy.h" />
+    <ClInclude Include="FreeCameraStrategy.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ICameraStrategy.h" />
+    <ClInclude Include="Lava.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="LevelSelectionScreen.h" />
+    <ClInclude Include="MenuScreen.h" />
+    <ClInclude Include="SideCameraStrategy.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="FontManager.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Worm.h" />
+    <ClInclude Include="WormPart.h" />
+    <ClInclude Include="Terrain.h" />
+    <ClInclude Include="tinyxml\tinystr.h" />
+    <ClInclude Include="tinyxml\tinyxml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\SDL2_ttf-2.0.12\lib\x64\SDL2_ttf.lib" />
+  </ItemGroup>
+</Project>

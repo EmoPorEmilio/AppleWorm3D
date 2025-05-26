@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+<<<<<<< HEAD
+      <FullPath>C:\Users\emili\OneDrive\Escritorio\proyectos\AppleWorm3D\Debug\OpenGL-basico.exe</FullPath>
+=======
+      <FullPath>C:\Users\emili\Downloads\OpenGL-basico\OpenGL-basico\Debug\OpenGL-basico.exe</FullPath>
+>>>>>>> master
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

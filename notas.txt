@@ -1,0 +1,31 @@
+-setup inicial de proyecto, repositorio GitHub, todos con acceso, todos pudiendo correr el proyecto
+-definir features
+-bajar a tareas, en qué puede trabajar cada uno esta semana
+
+ejemplo tareas que se pueden desarrollar independiente:
+
+imprescindibles:
+-pausa y salir
+-cargado de imágenes
+-HUD: menú de pausa y settings
+-HUD: score actual y tiempo
+-movimiento del gusano
+-física del gusano (se cae y queda trancado en los terrain)
+-posicionamientos de manzanas, colisión con manzana, la manzana desaparece y suma un punto
+-estructura base del gusano (me imagino puede estar dividida en 3 partes: cola, cabeza, cuerpo, y lo que se agranda es solo el cuerpo, me imagino podemos arrancar con 3 cubos y el cubo del medio se va duplicando, 1 cubo, 2 cubos, 3 cubos, súper geométrico)
+-setting: modo wireframe on/off
+-setting: modo texturas on/off
+-setting: modificar velocidad del juego
+-una luz
+-utilización de una textura
+-cargado y renderizado de al menos 1 modelo
+
+
+
+
+copadas:
+-explosión de partículas genérica, después la agregamos cuando ganás el nivel
+-miniexplosión de partículas genérica, después la agregamos cuando agarrás una manzana
+-modelo/textura de terreno
+-modelo/textura de manzana
+-modelo/textura de worm
