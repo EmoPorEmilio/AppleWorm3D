@@ -131,13 +131,6 @@ void Game::setupLighting() {
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
     glEnable(GL_NORMALIZE);
-    if (shading) {
-        glShadeModel(GL_SMOOTH);
-    }
-    else {
-        glShadeModel(GL_FLAT);
-    }
-    //
 
     GLfloat light0_pos[] = { 15.0f, 15.0f, 12.0f, 1.0f };
     GLfloat light0_amb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
@@ -458,7 +451,6 @@ Game::Game(SDL_Window* existingWindow, SDL_GLContext existingContext, TTF_Font* 
 {
     textured = true;
     wireframe = false;
-    shading = true;
     grid = new CubeGrid(gridSize);
     glEnable(GL_DEPTH_TEST);
     lastTimestamp = 0;
@@ -847,7 +839,15 @@ void Game::toggleTextures() {
 }
 
 void Game::toggleShading() {
-    shading = !shading;
+    GLint a = GLint();
+    glGetIntegerv(GL_SHADE_MODEL,&a);
+    std::cout << a;
+    if (a == GL_FLAT) {
+        glShadeModel(GL_SMOOTH);
+    }
+    else {
+        glShadeModel(GL_FLAT);
+    }
 }
 
 void Game::addWormToGameObjectsAndCubeGrid() {
