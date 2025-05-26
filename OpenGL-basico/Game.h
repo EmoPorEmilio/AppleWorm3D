@@ -62,6 +62,7 @@ private:
     int textWidthCache, textHeightCache;
     bool textured;
     bool wireframe;
+    bool shading;
 
     void renderHUD();
     void renderPauseMenu();
@@ -99,4 +100,5 @@ public:
     int getHUDNumber() const;
     void toggleWireframe();
     void toggleTextures();
+    void toggleShading();
 };

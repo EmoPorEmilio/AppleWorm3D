@@ -25,6 +25,7 @@
 SDL_Rect resumeButtonRect;
 SDL_Rect wireframeButtonRect;
 SDL_Rect texturesButtonRect;
+SDL_Rect shadingButtonRect;
 SDL_Rect gameSpeedButtonRect;
 SDL_Rect mainMenuButtonRect;
 SDL_Rect exitButtonRect;
@@ -130,7 +131,13 @@ void Game::setupLighting() {
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
     glEnable(GL_NORMALIZE);
-    glShadeModel(GL_SMOOTH);
+    if (shading) {
+        glShadeModel(GL_SMOOTH);
+    }
+    else {
+        glShadeModel(GL_FLAT);
+    }
+    //
 
     GLfloat light0_pos[] = { 15.0f, 15.0f, 12.0f, 1.0f };
     GLfloat light0_amb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
@@ -334,7 +341,11 @@ void Game::renderPauseMenu() {
     texturesButtonRect = { (int)(centerX - texW / 2), (int)(wireframeButtonRect.y - texH - 15), texW, texH + 5 };
     drawTextGame(textureText, texturesButtonRect.x, this->height - (texturesButtonRect.y + texturesButtonRect.h), textColor, false);
 
-    //std::string extraDashes = std::string("-",3) + "[]" + std::string("-",7);
+    const char* shadingText = "Alternar Facetado/Interpolado (F)";
+    int shadeW, shadeH;
+    TTF_SizeUTF8(gameFont, shadingText, &shadeW, &shadeH);
+    shadingButtonRect = { (int)(centerX - shadeW / 2), (int)(texturesButtonRect.y - shadeH - 15), shadeW, shadeH + 5 };
+    drawTextGame(shadingText, shadingButtonRect.x, this->height - (shadingButtonRect.y + shadingButtonRect.h), textColor, false);
     
     std::string gameSpeedText = "Velocidad del juego (<-, ->) ";
     gameSpeedText.append("x");
@@ -343,7 +354,7 @@ void Game::renderPauseMenu() {
     gameSpeedText.append(array);
     int speedW, speedH;
     TTF_SizeUTF8(gameFont, gameSpeedText.c_str(), &speedW, &speedH);
-    gameSpeedButtonRect = { (int)(centerX - speedW / 2), (int)(texturesButtonRect.y - speedH - 15), speedW, speedH + 5 };
+    gameSpeedButtonRect = { (int)(centerX - speedW / 2), (int)(shadingButtonRect.y - speedH - 15), speedW, speedH + 5 };
     drawTextGame(gameSpeedText.c_str(), gameSpeedButtonRect.x, this->height - (gameSpeedButtonRect.y + gameSpeedButtonRect.h), textColor, false);
 
     const char* mainMenuText = "Menu Principal (M)";
@@ -447,6 +458,7 @@ Game::Game(SDL_Window* existingWindow, SDL_GLContext existingContext, TTF_Font* 
 {
     textured = true;
     wireframe = false;
+    shading = true;
     grid = new CubeGrid(gridSize);
     glEnable(GL_DEPTH_TEST);
     lastTimestamp = 0;
@@ -581,7 +593,10 @@ GameLoopResult Game::loop() {
                         toggleTextures();
                     } else if (event.key.keysym.sym == SDLK_y) {
                         toggleWireframe();
-                    } else if (event.key.keysym.sym == SDLK_RIGHT) {
+                    } else if (event.key.keysym.sym == SDLK_f) {
+                        toggleShading();
+                    }
+                    else if (event.key.keysym.sym == SDLK_RIGHT) {
                         gameSpeed = gameSpeed + 0.25f;
                         if (gameSpeed > 2) {
                             gameSpeed = 2;
@@ -616,6 +631,9 @@ GameLoopResult Game::loop() {
                     } else if (mouseX >= wireframeButtonRect.x && mouseX <= wireframeButtonRect.x + wireframeButtonRect.w &&
                         oglMouseY >= (this->height - (wireframeButtonRect.y + wireframeButtonRect.h)) && oglMouseY <= (this->height - wireframeButtonRect.y)) {
                         toggleWireframe();
+                    } else if (mouseX >= shadingButtonRect.x && mouseX <= shadingButtonRect.x + shadingButtonRect.w &&
+                        oglMouseY >= (this->height - (shadingButtonRect.y + shadingButtonRect.h)) && oglMouseY <= (this->height - shadingButtonRect.y)) {
+                        toggleShading();
                     } else if (mouseX >= gameSpeedButtonRect.x && mouseX <= gameSpeedButtonRect.x + gameSpeedButtonRect.w &&
                         oglMouseY >= (this->height - (gameSpeedButtonRect.y + gameSpeedButtonRect.h)) && oglMouseY <= (this->height - gameSpeedButtonRect.y)) {
                         gameSpeed = gameSpeed + 0.25f;
@@ -826,6 +844,10 @@ void Game::toggleWireframe() {
 
 void Game::toggleTextures() {
     textured = !textured;
+}
+
+void Game::toggleShading() {
+    shading = !shading;
 }
 
 void Game::addWormToGameObjectsAndCubeGrid() {
