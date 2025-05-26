@@ -27,6 +27,7 @@ SDL_Rect wireframeButtonRect;
 SDL_Rect texturesButtonRect;
 SDL_Rect shadingButtonRect;
 SDL_Rect gameSpeedButtonRect;
+SDL_Rect lightSetupButtonRect;
 SDL_Rect mainMenuButtonRect;
 SDL_Rect exitButtonRect;
 
@@ -132,19 +133,40 @@ void Game::setupLighting() {
     glEnable(GL_LIGHT1);
     glEnable(GL_NORMALIZE);
 
-    GLfloat light0_pos[] = { 15.0f, 15.0f, 12.0f, 1.0f };
-    GLfloat light0_amb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-    GLfloat light0_dif[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+    if (lightingSetup == 0) {
+        GLfloat light0_pos[] = { 15.0f, 15.0f, 12.0f, 1.0f };
+        GLfloat light0_amb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+        glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
+        glLightfv(GL_LIGHT0, GL_AMBIENT, light0_amb);
+        GLfloat light0_dif[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif);
+        GLfloat light1_dif[] = { 0.4f, 0.4f, 0.4f, 1.0f };
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_dif);
+    }
+    else if (lightingSetup == 1) {
+        GLfloat light0_pos[] = { 9.0f, 20.0f, 12.0f, 1.0f };
+        GLfloat light0_amb[] = { 1.0f, 0.2f, 0.2f, 1.0f };
+        glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
+        glLightfv(GL_LIGHT0, GL_AMBIENT, light0_amb);
+        GLfloat light1_dif[] = { 0.6f, 0.6f, 0.4f, 1.0f };
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_dif);
+    }
+    else if (lightingSetup == 2){
+        GLfloat light0_pos[] = { 15.0f, 19.0f, 12.0f, 1.0f };
+        GLfloat light0_amb[] = { 0.1f, 0.1f, 0.3f, 1.0f };
+        glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
+        glLightfv(GL_LIGHT0, GL_AMBIENT, light0_amb);
+        GLfloat light0_dif[] = { 0.1f, 0.1f, 0.6f, 1.0f };
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif);
+        GLfloat light1_dif[] = { 0.1f, 0.1f, 0.5f, 1.0f };
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_dif);
+    }
+
     GLfloat light0_spe[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, light0_amb);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_dif);
     glLightfv(GL_LIGHT0, GL_SPECULAR, light0_spe);
 
     GLfloat light1_pos[] = { -10.0f, 10.0f, 10.0f, 1.0f };
-    GLfloat light1_dif[] = { 0.4f, 0.4f, 0.4f, 1.0f };
     glLightfv(GL_LIGHT1, GL_POSITION, light1_pos);
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_dif);
 }
 
 void Game::drawAxis(void)
@@ -340,6 +362,13 @@ void Game::renderPauseMenu() {
     shadingButtonRect = { (int)(centerX - shadeW / 2), (int)(texturesButtonRect.y - shadeH - 15), shadeW, shadeH + 5 };
     drawTextGame(shadingText, shadingButtonRect.x, this->height - (shadingButtonRect.y + shadingButtonRect.h), textColor, false);
     
+    const char* lightText = "Alternar Luces (L)";
+    int lightW, lightH;
+    TTF_SizeUTF8(gameFont, lightText, &lightW, &lightH);
+    lightSetupButtonRect = { (int)(centerX - lightW / 2), (int)(shadingButtonRect.y - lightH - 15), lightW, lightH + 5 };
+    drawTextGame(lightText, lightSetupButtonRect.x, this->height - (lightSetupButtonRect.y + lightSetupButtonRect.h), textColor, false);
+    //lightSetupButtonRect
+
     std::string gameSpeedText = "Velocidad del juego (<-, ->) ";
     gameSpeedText.append("x");
     char array[5];
@@ -347,7 +376,7 @@ void Game::renderPauseMenu() {
     gameSpeedText.append(array);
     int speedW, speedH;
     TTF_SizeUTF8(gameFont, gameSpeedText.c_str(), &speedW, &speedH);
-    gameSpeedButtonRect = { (int)(centerX - speedW / 2), (int)(shadingButtonRect.y - speedH - 15), speedW, speedH + 5 };
+    gameSpeedButtonRect = { (int)(centerX - speedW / 2), (int)(lightSetupButtonRect.y - speedH - 15), speedW, speedH + 5 };
     drawTextGame(gameSpeedText.c_str(), gameSpeedButtonRect.x, this->height - (gameSpeedButtonRect.y + gameSpeedButtonRect.h), textColor, false);
 
     const char* mainMenuText = "Menu Principal (M)";
@@ -443,6 +472,7 @@ Game::Game(SDL_Window* existingWindow, SDL_GLContext existingContext, TTF_Font* 
     gameFont(font),
     textTextureCache(0)
 {
+    lightingSetup = 0;
     wireframe = false;
     grid = new CubeGrid(gridSize);
     glEnable(GL_DEPTH_TEST);
@@ -581,6 +611,8 @@ GameLoopResult Game::loop() {
                         toggleWireframe();
                     } else if (event.key.keysym.sym == SDLK_f) {
                         toggleShading();
+                    } else if (event.key.keysym.sym == SDLK_l) {
+                        toggleLightingSetup();
                     }
                     else if (event.key.keysym.sym == SDLK_RIGHT) {
                         gameSpeed = gameSpeed + 0.25f;
@@ -620,6 +652,9 @@ GameLoopResult Game::loop() {
                     } else if (mouseX >= shadingButtonRect.x && mouseX <= shadingButtonRect.x + shadingButtonRect.w &&
                         oglMouseY >= (this->height - (shadingButtonRect.y + shadingButtonRect.h)) && oglMouseY <= (this->height - shadingButtonRect.y)) {
                         toggleShading();
+                    } else if (mouseX >= lightSetupButtonRect.x && mouseX <= lightSetupButtonRect.x + lightSetupButtonRect.w &&
+                        oglMouseY >= (this->height - (lightSetupButtonRect.y + lightSetupButtonRect.h)) && oglMouseY <= (this->height - lightSetupButtonRect.y)) {
+                        toggleLightingSetup();
                     } else if (mouseX >= gameSpeedButtonRect.x && mouseX <= gameSpeedButtonRect.x + gameSpeedButtonRect.w &&
                         oglMouseY >= (this->height - (gameSpeedButtonRect.y + gameSpeedButtonRect.h)) && oglMouseY <= (this->height - gameSpeedButtonRect.y)) {
                         gameSpeed = gameSpeed + 0.25f;
@@ -849,6 +884,20 @@ void Game::toggleShading() {
     }
     else {
         glShadeModel(GL_FLAT);
+    }
+}
+
+void Game::toggleLightingSetup() {
+    switch (lightingSetup) {
+    case 0:
+        lightingSetup = 1;
+        break;
+    case 1:
+        lightingSetup = 2;
+        break;
+    case 2:
+        lightingSetup = 0;
+        break;
     }
 }
 
