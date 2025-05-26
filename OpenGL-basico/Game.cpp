@@ -406,15 +406,9 @@ void Game::render(int renderWidth, int renderHeight) {
     } else {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
-    if (textured) {
-        glEnable(GL_TEXTURE_2D);
-    } else {
-        glDisable(GL_TEXTURE_2D);
-    }
     for (auto& gameObject : gameObjects) {
         gameObject->draw();
     }
-    glDisable(GL_TEXTURE_2D);
     if (wireframe) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
@@ -449,10 +443,10 @@ Game::Game(SDL_Window* existingWindow, SDL_GLContext existingContext, TTF_Font* 
     gameFont(font),
     textTextureCache(0)
 {
-    textured = true;
     wireframe = false;
     grid = new CubeGrid(gridSize);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_TEXTURE_2D);
     lastTimestamp = 0;
     currentTimestamp = SDL_GetPerformanceCounter();
     gameSpeed = 1;
@@ -835,13 +829,21 @@ void Game::toggleWireframe() {
 }
 
 void Game::toggleTextures() {
-    textured = !textured;
+    GLboolean a = GLboolean();
+    glGetBooleanv(GL_TEXTURE_2D, &a);
+    //std::cout << a;
+    if (a == true) {
+        glDisable(GL_TEXTURE_2D);
+    }
+    else {
+        glEnable(GL_TEXTURE_2D);
+    }
 }
 
 void Game::toggleShading() {
     GLint a = GLint();
     glGetIntegerv(GL_SHADE_MODEL,&a);
-    std::cout << a;
+    //std::cout << a;
     if (a == GL_FLAT) {
         glShadeModel(GL_SMOOTH);
     }
