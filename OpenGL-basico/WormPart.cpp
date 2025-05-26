@@ -37,3 +37,10 @@ bool WormPart::isAnimating() {
 	return this->anim->IsAnimating();
 }
 
+Vector3 WormPart::getAnimatorEndPosition() {
+	if (anim != nullptr) {
+	
+	
+		return this->anim->GetEndPosition();
+	}
+}

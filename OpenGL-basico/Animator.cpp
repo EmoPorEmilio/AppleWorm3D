@@ -91,3 +91,7 @@ void Animator::SetPosition(Vector3 endPos) {
 Vector3 Animator::GetObjectPosition() {
 	return this->go->GetPosition();
 }
+
+Vector3 Animator::GetEndPosition() {
+	return endPos;
+}

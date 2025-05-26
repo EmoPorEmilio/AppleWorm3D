@@ -32,4 +32,5 @@ public:
 	void Update(float deltaTime);
 	void SetPosition(Vector3 endPos);
 	Vector3 GetObjectPosition();
+	Vector3 GetEndPosition();
 };

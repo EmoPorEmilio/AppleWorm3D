@@ -791,6 +791,8 @@ void Game::eatApple() {
 
 void Game::addGameObjectToGameObjectsAndCubeGrid(GameObject* go) {
     this->gameObjects.push_back(go);
+    //std::cout << "(" << go->GetPosition().x << "," << go->GetPosition().y << "," << go->GetPosition().z << ")";
+    
     this->grid->setObject(go->GetPosition(), go);
 }
 
@@ -829,7 +831,9 @@ void Game::toggleTextures() {
 void Game::addWormToGameObjectsAndCubeGrid() {
     std::vector<GameObject*> wormParts = this->worm->getParts();
     for (auto& part : wormParts) {
-        gameObjects.push_back(part);
+        WormPart* wpart = static_cast<WormPart*>(part);
+        this->gameObjects.push_back(part);
+        this->grid->setObject(wpart->getAnimatorEndPosition(), part);
     }
 }
 

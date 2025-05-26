@@ -19,4 +19,5 @@ public:
     void updateAnimator(float deltaTime);
     bool isAnimating();
     void update(float deltaTime) override;
+    Vector3 getAnimatorEndPosition();
 };
